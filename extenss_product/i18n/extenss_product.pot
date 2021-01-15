@@ -1,0 +1,646 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* extenss_product
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20200316\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-20 20:36+0000\n"
+"PO-Revision-Date: 2020-08-20 20:36+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_base_interest_rate__shortcut
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_calculation_base__shortcut
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_credit_type__shortcut
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_rec_docs__shortcut
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_type_docs__shortcut
+msgid "Abbreviation"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__apply_company
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__apply_company
+msgid "Apply Company"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__apply_person
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__apply_person
+msgid "Apply Person"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_extenss_product_base_interest_rate
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_base_interest_rate__name
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate_date__base_interest_rate_id
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__base_interest_rate
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__base_interest_rate
+#: model:ir.module.category,name:extenss_product.module_category_extenss_product_base_interest_rate
+msgid "Base Interest Rate"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__beneficiaries
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__beneficiaries
+msgid "Beneficiaries"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__financial_situation
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__financial_situation
+msgid "Business information"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_extenss_product_calculation_base
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_calculation_base__name
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__calculation_base
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__calculation_base
+#: model:ir.module.category,name:extenss_product.module_category_extenss_product_calculation_base
+msgid "Calculation Base"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__calculation_type
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__calculation_type
+msgid "Calculation Type"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate__cat
+#: model:ir.model.fields,field_description:extenss_product.field_product_template_attribute_value__cat_extra
+#: model_terms:ir.ui.view,arch_db:extenss_product.product_interest_rate_form_extend
+msgid "Cat"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__company_id
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__company_id
+msgid "Company"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields.selection,name:extenss_product.selection__extenss_product_type_docs__related_to__contact
+msgid "Contact"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_base_interest_rate__create_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_calculation_base__create_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_cat_docs__create_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_credit_type__create_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_frequencies__create_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate__create_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate_date__create_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_rec_docs__create_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_recruitment_documents__create_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_type_docs__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_base_interest_rate__create_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_calculation_base__create_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_cat_docs__create_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_credit_type__create_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_frequencies__create_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate__create_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate_date__create_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_rec_docs__create_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_recruitment_documents__create_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_type_docs__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_extenss_product_credit_type
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_credit_type__name
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__credit_type
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__credit_type
+#: model:ir.module.category,name:extenss_product.module_category_extenss_product_credit_type
+msgid "Credit Type"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__company_currency
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__company_currency
+msgid "Currency"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate_date__date
+msgid "Date"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_frequencies__days
+msgid "Days"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__days_past_due
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__days_past_due
+msgid "Days past due"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__days_pre_notice
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__days_pre_notice
+msgid "Days pre-notice"
+msgstr ""
+
+#. module: extenss_product
+#: model_terms:ir.ui.view,arch_db:extenss_product.product_template_product_form_extend
+msgid "Description"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_base_interest_rate__display_name
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_calculation_base__display_name
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_cat_docs__display_name
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_credit_type__display_name
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_frequencies__display_name
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate__display_name
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate_date__display_name
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_rec_docs__display_name
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_recruitment_documents__display_name
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_type_docs__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_cat_docs__doc_id
+msgid "Doc"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_recruitment_documents__catalog_recru_docs
+msgid "Document"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_rec_docs__name
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_type_docs__name
+msgid "Document Name"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_cat_docs__catalogo_docs
+msgid "Document name"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_extenss_product_cat_docs
+msgid "Documentos requeridos"
+msgstr ""
+
+#. module: extenss_product
+#: model_terms:ir.ui.view,arch_db:extenss_product.product_template_product_form_extend
+msgid "Documents"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__rate_arrears_interest
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__rate_arrears_interest
+msgid "Factor"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate__final_term
+msgid "Final term"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_extenss_product_frequencies
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate__frequencies_ir
+#: model:ir.model.fields,field_description:extenss_product.field_product_template_attribute_value__frequencies_extra
+#: model:ir.module.category,name:extenss_product.module_category_extenss_product_frequencies
+msgid "Frequencies"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_frequencies__name
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__frequency
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__frequency
+#: model:ir.model.fields,field_description:extenss_product.field_product_template_attribute_value__frequency_extra
+msgid "Frequency"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__hide
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__hide
+msgid "Hide"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_base_interest_rate__id
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_calculation_base__id
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_cat_docs__id
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_credit_type__id
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_frequencies__id
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate__id
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate_date__id
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_rec_docs__id
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_recruitment_documents__id
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_type_docs__id
+msgid "ID"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__include_taxes
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__include_taxes
+msgid "Include Taxes"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate__initial_term
+msgid "Initial term"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate__interest_rate_2
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate__interest_rate_id
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate_date__interest_rate
+#: model:ir.model.fields,field_description:extenss_product.field_product_template_attribute_value__interest_rate_extra
+#: model_terms:ir.ui.view,arch_db:extenss_product.product_interest_rate_form_extend
+msgid "Interest Rate"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_extenss_product_interest_rate_date
+msgid "Interest Rate Date"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_base_interest_rate____last_update
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_calculation_base____last_update
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_cat_docs____last_update
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_credit_type____last_update
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_frequencies____last_update
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate____last_update
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate_date____last_update
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_rec_docs____last_update
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_recruitment_documents____last_update
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_type_docs____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_base_interest_rate__write_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_calculation_base__write_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_cat_docs__write_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_credit_type__write_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_frequencies__write_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate__write_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate_date__write_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_rec_docs__write_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_recruitment_documents__write_uid
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_type_docs__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_base_interest_rate__write_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_calculation_base__write_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_cat_docs__write_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_credit_type__write_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_frequencies__write_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate__write_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_interest_rate_date__write_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_rec_docs__write_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_recruitment_documents__write_date
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_type_docs__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: extenss_product
+#: model:res.groups,name:extenss_product.extenss_product_base_interest_rate_group_manager
+#: model:res.groups,name:extenss_product.extenss_product_calculation_base_group_manager
+#: model:res.groups,name:extenss_product.extenss_product_credit_type_group_manager
+#: model:res.groups,name:extenss_product.extenss_product_frequencies_group_manager
+msgid "Manager"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__max_age
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__max_age
+msgid "Max. Age"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__max_amount
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__max_amount
+msgid "Max. Amount"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields.selection,name:extenss_product.selection__product_template__frequency__1
+msgid "Mensual"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__min_age
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__min_age
+msgid "Min. Age"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__min_amount
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__min_amount
+msgid "Min. Amount"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "Must add Recruitment Documents"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__number_pay_rest
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__number_pay_rest
+msgid "Number of payments for restructuring"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__point_base_interest_rate
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__point_base_interest_rate
+msgid "P. of Base Interest Rate"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__patrimonial_relationship
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__patrimonial_relationship
+msgid "Patrimonial Declaration"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_product_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_recruitment_documents__product_id
+msgid "Product"
+msgstr ""
+
+#. module: extenss_product
+#: model_terms:ir.ui.view,arch_db:extenss_product.product_template_product_form_extend
+msgid "Product Code"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_product_template_attribute_value
+msgid "Product Template Attribute Value"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields.selection,name:extenss_product.selection__product_template__frequency__0
+msgid "Quincenal"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_extenss_product_recruitment_documents
+msgid "Recruitmen Documents"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_extenss_product_rec_docs
+#: model_terms:ir.ui.view,arch_db:extenss_product.product_template_product_form_extend
+msgid "Recruitment Documents"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_type_docs__related_to
+msgid "Related to"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields.selection,name:extenss_product.selection__extenss_product_type_docs__related_to__request
+msgid "Request"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_extenss_product_cat_docs__flag_activo
+msgid "Required"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__endorsement
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__endorsement
+msgid "Requires Endorsement"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__obligated_solidary
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__obligated_solidary
+msgid "Requires Obligated solidary"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__guarantee
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__guarantee
+msgid "Requires Warranty"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__sic_consult
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__sic_consult
+msgid "SIC Query"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields.selection,name:extenss_product.selection__product_template__calculation_type__0
+msgid "Saldos Insolutos"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields.selection,name:extenss_product.selection__product_template__frequency__2
+msgid "Semanal"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__socioeconomic_study
+#: model:ir.model.fields,field_description:extenss_product.field_product_template__socioeconomic_study
+msgid "Socio-economic study"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_template_attribute_value__term_extra
+msgid "Term"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.constraint,message:extenss_product.constraint_extenss_product_base_interest_rate_name_unique
+msgid "The Base Interest rate unique"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Cat at must be greater than 0"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Cat must be greater than 0"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.constraint,message:extenss_product.constraint_extenss_product_interest_rate_date_name_unique
+msgid "The Date must be unique"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.constraint,message:extenss_product.constraint_extenss_product_cat_docs_name_unique
+#: model:ir.model.constraint,message:extenss_product.constraint_extenss_product_rec_docs_name_unique
+#: model:ir.model.constraint,message:extenss_product.constraint_extenss_product_recruitment_documents_name_unique
+#: model:ir.model.constraint,message:extenss_product.constraint_extenss_product_type_docs_name_unique
+msgid "The Document name must be unique"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Final Term at must be greater than 0"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Interest Rate at must be greater than 0"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Interest Rate must be greater than 0"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Internal Term must be greater than 0"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Internal Term must be less than The Final Term"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Max. Age is not valid"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Max. Age must be greater than 0"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Max. Amount must be greater than 0"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Min. Age is not valid"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Min. Age must be greater than 0"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Min. Age must be less than The Max. Age"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Min. Amount must be greater than 0"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Min. Amount must be less than The Max. Amount"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Point Base Interest Rate at must be greater than"
+msgstr ""
+
+#. module: extenss_product
+#: code:addons/extenss_product/models/product_template.py:0
+#, python-format
+msgid "The Term must be greater than 0"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,help:extenss_product.field_product_product__cat_extra
+#: model:ir.model.fields,help:extenss_product.field_product_product__frequency_extra
+#: model:ir.model.fields,help:extenss_product.field_product_product__interest_rate_extra
+#: model:ir.model.fields,help:extenss_product.field_product_product__term_extra
+msgid "This is the sum of the extra price of all attributes"
+msgstr ""
+
+#. module: extenss_product
+#: model_terms:ir.ui.view,arch_db:extenss_product.product_template_product_form_extend
+msgid "This note is only for internal purposes."
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_extenss_product_type_docs
+msgid "Type Documents"
+msgstr ""
+
+#. module: extenss_product
+#: model:res.groups,name:extenss_product.extenss_product_base_interest_rate_group_user
+#: model:res.groups,name:extenss_product.extenss_product_calculation_base_group_user
+#: model:res.groups,name:extenss_product.extenss_product_credit_type_group_user
+#: model:res.groups,name:extenss_product.extenss_product_frequencies_group_user
+msgid "User"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__cat_extra
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__interest_rate_extra
+msgid "Variant Cat Extra"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__frequency_extra
+msgid "Variant Fequency Extra"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model.fields,field_description:extenss_product.field_product_product__term_extra
+msgid "Variant Term Extra"
+msgstr ""
+
+#. module: extenss_product
+#: model:ir.model,name:extenss_product.model_extenss_product_interest_rate
+msgid "multiples registros interest rate"
+msgstr ""
