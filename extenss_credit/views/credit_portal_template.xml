@@ -154,6 +154,22 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4" style="float: right;">
+                            <label>Paid:</label>
+                            <span t-field="credit.total_paid"/>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-md-4 text-right">
+                                <label>Paid</label>
+                            </div>
+                            <div class="col-md-4">
+                                <span t-field="credit.total_paid"/>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="row">
                     <t t-call="portal.portal_table">
                         <thead>
                           <tr class="active">
