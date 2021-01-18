@@ -427,11 +427,15 @@ class ExtenssLead(models.Model):
     _inherit = 'crm.lead'
 
     sale_order_ids = fields.One2many('sale.order', 'opportunity_id', string='Orders', domain=lambda self:[('state','=','sale')])
+    amount = fields.Monetary(related='sale_order_ids.amount', currency_field='company_currency',)
     af_s = fields.Boolean(related='sale_order_ids.af')
     dn_s = fields.Boolean(related='sale_order_ids.dn')
     productid = fields.Many2one(related='sale_order_ids.product_id')
     conciliation_lines_ids = fields.Many2many('extenss.credit.conciliation_lines', string='Payment')#,  default=_default_conciliation)
     flag_dispersion = fields.Boolean(string='Dispersion', default=False, tracking=True, translate=True)
+
+    company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
+    company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company.id)
 
     ####Metodo para Pago inicial
     def action_apply_payment(self):
