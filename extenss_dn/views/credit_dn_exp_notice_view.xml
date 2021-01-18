@@ -58,7 +58,7 @@
                             <field name="payment_date"/>
                             <field name="conciliation_credit_ids" options="{'no_create': True}" domain="[('status', '=', 'pending'),('type_rec', '=', 'dn')]"><!--domain="[('status', '=', 'pending'),('type_rec', '=', 'dn')]"-->
                                 <tree editable="bottom">
-                                    <field name="check" readonly="1"/>
+                                    <field name="check" />
                                     <field name="reference" readonly="1"/>
                                     <field name="customer" options="{'no_open': True}" readonly="1"/>
                                     <field name="date" readonly="1"/>
