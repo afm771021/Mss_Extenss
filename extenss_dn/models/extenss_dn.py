@@ -427,7 +427,7 @@ class ExtenssLead(models.Model):
     _inherit = 'crm.lead'
 
     sale_order_ids = fields.One2many('sale.order', 'opportunity_id', string='Orders', domain=lambda self:[('state','=','sale')])
-    amount = fields.Monetary(related='sale_order_ids.amount', currency_field='company_currency')
+    #amount = fields.Monetary(related='sale_order_ids.amount', currency_field='company_currency')
     af_s = fields.Boolean(related='sale_order_ids.af')
     dn_s = fields.Boolean(related='sale_order_ids.dn')
     productid = fields.Many2one(related='sale_order_ids.product_id')
