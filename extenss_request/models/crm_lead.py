@@ -452,6 +452,7 @@ class Lead(models.Model):
             return self.env.ref('extenss_request.report_extenss_request_sale_order').report_action(quotation)
 
     def action_get_offers(self):
+        anualperiods = 0
         amount = self.payment_capacity
         # cred_type_prod = self.env['extenss.product.template'].search([('credit_type.shortcut', '=', 'DN')])
         # for cred in cred_type_prod:

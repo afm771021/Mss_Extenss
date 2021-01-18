@@ -1616,7 +1616,7 @@ class ExtenssCreditExpiryNotices(models.Model):
     @api.depends('expiry_notice_ids','expiry_notice_ids.total_paid_concept')
     def _compute_total_paid_not(self):
         for reg in self:
-            reg.total_paid_not = sum([line.total_paid_concept for line in reg.expiry_notice_ids])
+            reg.total_paid_not = sum([line.total_paid_concept for line in reg.expiry_notice_ids if line.concept != 'morint' and line.concept != 'morintvat'])
 
     @api.depends('expiry_notice_ids','expiry_notice_ids.total_paid_concept','expiry_notice_ids.amount_concept')
     def _compute_total_moras(self):
@@ -2376,6 +2376,7 @@ class ExtenssCreditConciliation(models.Model):
                 #for act in records_account:
                 calculation_base = self.env['extenss.credit'].search([('id','=',reg.credit_expiry_id.id)]).calculation_base
                 cs = self.env['extenss.credit'].search([('id','=',reg.credit_expiry_id.id)]).cs
+                dn = self.env['extenss.credit'].search([('id','=',reg.credit_expiry_id.id)]).dn
                 ap = self.env['extenss.credit'].search([('id','=',reg.credit_expiry_id.id)]).ap
                 vatf = self.env['extenss.credit'].search([('id','=',reg.credit_expiry_id.id)]).vat_factor
                 int_rate = self.env['extenss.credit'].search([('id','=',reg.credit_expiry_id.id)]).factor_rate
@@ -2847,7 +2848,7 @@ class ExtenssCreditConciliation(models.Model):
                         amount=0
                         for conexp in concepts_expiration :
                             if conexp.concept == 'capital' :
-                                if cs == False:
+                                if cs == False and dn==False:
                                     total_paid_concept = ((balance/(1+(vatf/100))) + capay)
                                 conexp.write({
                                 'total_paid_concept': (round(total_paid_concept,2))
