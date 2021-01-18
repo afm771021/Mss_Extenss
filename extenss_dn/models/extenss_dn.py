@@ -236,7 +236,7 @@ class ExtenssDN(models.Model):
         #self.apply_mov_pay()
         list_concepts = []
         for reg in self.conciliation_credit_ids:
-            if reg.check == False and reg.status == 'pending':
+            if reg.check == False and reg.status == 'pending' and reg.customer == self.customer_id:
                 print(self.bill_id.id)
                 self.env['extenss.credit.accounting_payments'].action_apply_movement(self.bill_id.id, 'abono', reg.amount,'')
                 print(reg.id)
@@ -246,30 +246,30 @@ class ExtenssDN(models.Model):
                 print(self.product_id.id)
                 reg.status = 'applied'
                 reg.check = True
-        exp_notices = self.env['extenss.credit.expiry_notices'].search([('credit_expiry_id', '=', self.id),('total_to_pay', '>', 0)])
-        for exp_notice in exp_notices:
-            print(exp_notice.total_to_pay)
-            print(exp_notice.id)
-            self.env['extenss.credit.conciliation'].apply_payment(exp_notice.id, self.payment_date)
-        #self.conf_datamart('pay_notice')
-        regs_conf = self.env['extenss.datamart.configuration'].search([('concept', '=', 'pay_notice')])
-        if regs_conf:
-            for reg_conf in regs_conf:
-                print(reg.id)
-                for reg_events in reg_conf.event_id:
-                    event_key = reg_events.event_key
-                    print(event_key)
+            exp_notices = self.env['extenss.credit.expiry_notices'].search([('credit_expiry_id', '=', self.id),('total_to_pay', '>', 0)])
+            for exp_notice in exp_notices:
+                print(exp_notice.total_to_pay)
+                print(exp_notice.id)
+                self.env['extenss.credit.conciliation'].apply_payment(exp_notice.id, self.payment_date)
+            #self.conf_datamart('pay_notice')
+            regs_conf = self.env['extenss.datamart.configuration'].search([('concept', '=', 'pay_notice')])
+            if regs_conf:
+                for reg_conf in regs_conf:
+                    print(reg.id)
+                    for reg_events in reg_conf.event_id:
+                        event_key = reg_events.event_key
+                        print(event_key)
 
-                    #for lines in self.conciliation_lines_ids:
-                    list_concepts.append(reg.customer.id)
-                    list_concepts.append(reg.amount) 
-                    list_concepts.append(self.product_id.id)
-                    list_concepts.append(event_key) #)
-                    print(list_concepts)
-                    self.env['extenss.credit'].create_records(list_concepts)
-                    list_concepts = []
-        else:
-            raise ValidationError(_('Not exist record in Configuration in Datamart'))
+                        #for lines in self.conciliation_lines_ids:
+                        list_concepts.append(reg.customer.id)
+                        list_concepts.append(reg.amount) 
+                        list_concepts.append(self.product_id.id)
+                        list_concepts.append(event_key) #)
+                        print(list_concepts)
+                        self.env['extenss.credit'].create_records(list_concepts)
+                        list_concepts = []
+            else:
+                raise ValidationError(_('Not exist record in Configuration in Datamart'))
 
     # def apply_mov_pay(self):
     #     for reg in self.conciliation_credit_ids:
@@ -427,7 +427,7 @@ class ExtenssLead(models.Model):
     _inherit = 'crm.lead'
 
     sale_order_ids = fields.One2many('sale.order', 'opportunity_id', string='Orders', domain=lambda self:[('state','=','sale')])
-    amount = fields.Monetary(related='sale_order_ids.amount', currency_field='company_currency',)
+    amount = fields.Monetary(related='sale_order_ids.amount', currency_field='company_currency')
     af_s = fields.Boolean(related='sale_order_ids.af')
     dn_s = fields.Boolean(related='sale_order_ids.dn')
     productid = fields.Many2one(related='sale_order_ids.product_id')
@@ -448,7 +448,7 @@ class ExtenssLead(models.Model):
                     event_key = reg_events.event_key
                     for reg_order in self.sale_order_ids:
                         for lines in self.conciliation_lines_ids:
-                            if reg_order.amount == abs(lines.amount):
+                            if reg_order.amount == abs(lines.amount) and self.partner_id == lines.customer:
                                 print('entra ')
                                 list_data.append(lines.customer.id)
                                 list_data.append(abs(lines.amount))
