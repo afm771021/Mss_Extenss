@@ -316,9 +316,9 @@ class Lead(models.Model):
                     })
 
     def validations(self):
-        count_sales = self.env['sale.order'].search_count([('opportunity_id', '=', self.id)])
-        if count_sales == 0:
-            raise ValidationError(_('Please add a quote'))
+        # count_sales = self.env['sale.order'].search_count([('opportunity_id', '=', self.id)])
+        # if count_sales == 0:
+        #     raise ValidationError(_('Please add a quote'))
 
         docs = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', self.id)])
         for reg_docs in docs:
