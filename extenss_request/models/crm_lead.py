@@ -96,6 +96,7 @@ class Lead(models.Model):
     @api.constrains('stage_id')
     def _check_stage_id(self):
         if self.stage_id.id != self.env['crm.stage'].search([('sequence', '=', '1')]).id:
+
             self.validations()
             self.user_send_req = self.env.user.id
             #self.stage_id =  2
@@ -316,9 +317,10 @@ class Lead(models.Model):
                     })
 
     def validations(self):
-        count_sales = self.env['sale.order'].search_count([('opportunity_id', '=', self.id)])
-        if count_sales == 0:
-            raise ValidationError(_('Please add a quote'))
+        if self.stage_id.id != self.env['crm.stage'].search([('sequence', '=', '1')]).id:
+            count_sales = self.env['sale.order'].search_count([('opportunity_id', '=', self.id)])
+            if count_sales == 0:
+                raise ValidationError(_('Please add a quote'))
 
         docs = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', self.id)])
         for reg_docs in docs:
