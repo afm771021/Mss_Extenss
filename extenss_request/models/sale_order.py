@@ -330,7 +330,7 @@ class SaleOrder(models.Model):
     max_age = fields.Integer('Max. Age')
     min_amount = fields.Monetary('Min. Amount',  currency_field='company_currency', tracking=True)
     max_amount = fields.Monetary('Max. Amount',  currency_field='company_currency', tracking=True)
-    amount = fields.Monetary('Request Amount', currency_field='company_currency',  store=True, tracking=True)
+    amount = fields.Monetary('Request Amount', currency_field='company_currency', tracking=True)
     amount_si = fields.Monetary('Amount s/iva', currency_field='company_currency', tracking=True)
     payment_amount = fields.Monetary('Payment Amount', currency_field='company_currency', tracking=True)
     tax_amount = fields.Monetary('Tax Amount', currency_field='company_currency', tracking=True)

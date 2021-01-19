@@ -317,7 +317,7 @@ class Lead(models.Model):
                     })
 
     def validations(self):
-        if self.stage_id.id != self.env['crm.stage'].search([('sequence', '=', '1')]).id:
+        if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '2')]).id:
             count_sales = self.env['sale.order'].search_count([('opportunity_id', '=', self.id)])
             if count_sales == 0:
                 raise ValidationError(_('Please add a quote'))
