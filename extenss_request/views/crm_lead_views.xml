@@ -27,7 +27,7 @@
                             type="action" class="oe_highlight" context="{'default_lead_id': active_id}" attrs="{'invisible': [('stage_id', '!=', 1)]}"/>
             </xpath>
             <xpath expr="//button[@name='action_set_won_rainbowman']" position="after">
-                <button name="action_send_sale" string="Send" type="object" class="btn-primary" attrs="{'invisible': ['|', ('document_count', '=', 0),('stage_id', '!=', 1)]}"/>
+                <button name="action_send_sale" string="Send" type="object" class="btn-primary" attrs="{'invisible': [('stage_id', '!=', 1)]}"/><!--'|', ('document_count', '=', 0),-->
             </xpath>
             <xpath expr="//button[@name='action_send_sale']" position="after">
                 <button name="action_autorize_sale" string="Authorize" type="object" class="btn-primary" attrs="{'invisible': [('stage_id', '!=', 2)]}"/>
@@ -36,10 +36,10 @@
                 <button name="action_refuse_sale" string="To refuse" type="object" class="btn-primary" attrs="{'invisible': [('stage_id', '!=', 2)]}"/>
             </xpath>
             <xpath expr="//button[@name='action_refuse_sale']" position="after">
-                <button name="download_file_contrato" string="Print Contrato" type="object" class="btn-primary" attrs="{'invisible': ['|', ('sequence_stage', 'not in', [3,6]),('btn_active', '=', False)]}"/>
+                <button name="download_file_contrato" string="Print Contrato" type="object" class="btn-primary" attrs="{'invisible': ['|','|','|', ('sequence_stage', 'not in', [3,6]),('btn_active', '=', False),('product_name', '=', 'LFF'),('product_name', '=', 'ff')]}"/>
             </xpath>
             <xpath expr="//button[@name='action_refuse_sale']" position="after">
-                <button name="download_file_pagare" string="Print Pagare" type="object" class="btn-primary" attrs="{'invisible': ['|', ('sequence_stage', 'not in', [3,6]),('btn_active', '=', False)]}"/>
+                <button name="download_file_pagare" string="Print Pagare" type="object" class="btn-primary" attrs="{'invisible': ['|','|','|', ('sequence_stage', 'not in', [3,6]),('btn_active', '=', False),('product_name', '=', 'LFF'),('product_name', '=', 'ff')]}"/>
             </xpath>
             <xpath expr="//button[@name='action_autorize_sale']" position="after">
                 <button name="action_approved_sale" string="Approved" type="object" class="btn-primary" attrs="{'invisible': ['|', ('sequence_stage', 'not in', [3,4,5])]}"/>                                                     
@@ -48,10 +48,10 @@
                 <button name="action_rejected_sale" string="Rejected" type="object" class="btn-primary" attrs="{'invisible': ['|', ('sequence_stage', 'not in', [3,4,5])]}"/>
             </xpath>
             <xpath expr="//button[@name='download_file_contrato']" position="after">
-                <button name="download_file_amortization" string="Print Amortization" type="object" class="btn-primary" attrs="{'invisible': ['|', ('sequence_stage', 'not in', [3,6]),('btn_active', '=', False)]}"/>
+                <button name="download_file_amortization" string="Print Amortization" type="object" class="btn-primary" attrs="{'invisible': ['|','|','|', ('sequence_stage', 'not in', [3,6]),('btn_active', '=', False),('product_name', '=', 'LFF'),('product_name', '=', 'ff')]}"/>
             </xpath>
             <xpath expr="//button[@name='download_file_amortization']" position="after">
-                <button name="validate_docs_rec" string="Release credit" type="object" class="btn-primary" attrs="{'invisible': ['|', ('sequence_stage', 'not in', [6]),('btn_active', '=', False)]}"/>
+                <button name="validate_docs_rec" string="Release credit" type="object" class="btn-primary" attrs="{'invisible': ['|','|','|', ('sequence_stage', 'not in', [6]),('btn_active', '=', False),('product_name', '=', 'LFF')]}"/>
             </xpath>
             <!-- <xpath expr="//widget[@name='web_ribbon']" position="replace">
                 <widget name="web_ribbon" title="Lost" bg_color="bg-danger" attrs="{'invisible': ['|', ('probability', '&gt;', 0), ('active', '=', True)]}"/>
@@ -101,9 +101,9 @@
                 <field name="description" attrs="{'readonly': [('stage_id', '!=', 1)]}"/>
                 <field name="sequence_stage" invisible="1"/>
                 <field name="btn_active" invisible="1"/>
-                <field name="flag_documents"/>
-                <field name="flag_initial_payment" attrs="{'invisible': [('product_name', '=', 'dn')]}"/>
-                <field name="flag_dispersion" attrs="{'invisible': [('product_name', '!=', 'dn')]}"/>
+                <field name="flag_documents" attrs="{'invisible': ['|', ('product_name', '=', 'LFF'),('product_name', '=', 'ff')]}"/>
+                <field name="flag_initial_payment" attrs="{'invisible': [('product_name', '=', 'dn'),('product_name', '=', 'ff')]}"/>
+                <field name="flag_dispersion" attrs="{'invisible': [('product_name', '!=', 'dn'),('product_name', '!=', 'ff')]}"/>
                 <field name="ref_number"/>
                 <!-- <field name="product_id" readonly="1"/> -->
                 <!--><field name="id"/><-->
@@ -414,7 +414,7 @@
                 </page>
             </xpath>
             <xpath expr="//page[@name='personal_references']" position="after">
-                <page name="payroll" string="Payroll" attrs="{'invisible' : [('product_name', '!=', 'dn')]}">
+                <page name="payroll" string="Payroll" attrs="{'invisible' : [('product_name', '!=', 'DN')]}">
                     <form>
                         <header>
                             <button string="Calculate" name="action_calculate_pc" type="object" class="oe_highlight"/>
@@ -433,6 +433,77 @@
                                     <field name="payment_capacity" readonly="1"/>
                                 </group>
                             </group>
+                        </group>
+                    </form>
+                </page>
+            </xpath>
+            <xpath expr="//page[@name='payroll']" position="after">
+                <page name="factoring_opening" string="Financial Factoring Opening" attrs="{'invisible': [('product_name', '!=', 'LFF')]}">
+                    <form>
+                        <group>
+                            <group>
+                                <field name="catlg_product"/>
+                                <field name="amount_ff"/>
+                                <field name="amount_out_vat" readonly="1"/>
+                                <field name="purpose"/>
+                                <field name="description_purpose"/>
+                                <field name="init_date"/>
+                                <field name="invoice_date"/>
+                                <field name="payment_method"/>
+                                <field name="capacity"/>
+                                <field name="amount_financed" readonly="1"/>
+                                <field name="commission_details"/>
+                                <field name="commissions"/>
+                                <field name="commission_vat" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="tax_rate" widget="many2many_tags" readonly="1"/>
+                                <field name="fixed" readonly="1"/>
+                                <field name="fixed_rate"/>
+                                <field name="base_rate" readonly="1"/>
+                                <field name="variance" readonly="1"/>
+                                <field name="current_rate" readonly="1"/>
+                                <field name="days" readonly="1"/>
+                            </group>
+                        </group>
+                    </form>
+                </page>
+            </xpath>
+            <xpath expr="//page[@name='payroll']" position="after">
+                <page name="factoring_provision" string="Financial Factoring Provision" attrs="{'invisible': [('product_name', '!=', 'ff')]}">
+                    <form>
+                        <group>
+                            <group>
+                                <field name="catlg_product"/>
+                                <field name="amount_ff"/>
+                                <field name="amount_out_vat" readonly="1"/>
+                                <field name="purpose"/>
+                                <field name="description_purpose"/>
+                                <field name="init_date"/>
+                                <field name="invoice_date"/>
+                                <field name="payment_method"/>
+                                <field name="capacity"/>
+                                <field name="amount_financed" readonly="1"/>
+                                <field name="commission_details"/>
+                                <field name="commissions" readonly="1"/>
+                                <field name="commission_vat" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="tax_rate" widget="many2many_tags" readonly="1"/>
+                                <field name="fixed" readonly="1"/>
+                                <field name="fixed_rate" readonly="1"/>
+                                <field name="base_rate" readonly="1"/>
+                                <field name="variance" readonly="1"/>
+                                <field name="current_rate" readonly="1"/>
+                                <field name="days" readonly="1"/>
+
+                                <field name='interest' readonly="1"/>
+                                <field name='interest_vat' readonly="1"/>
+                                <field name='total_payment' readonly="1"/>
+
+                                <field name='amount_delivered'/>
+                            </group>
+
                         </group>
                     </form>
                 </page>

@@ -147,6 +147,7 @@ class Credits(models.Model):
     af = fields.Boolean(String='AF')
     ap = fields.Boolean(String='AP')
     dn = fields.Boolean(string='DN')
+    ff = fields.Boolean(string='FF')
     amortization_ids = fields.One2many(
         'extenss.credit.amortization', 
         'credit_id', 
