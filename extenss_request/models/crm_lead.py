@@ -198,16 +198,23 @@ class Lead(models.Model):
                         raise ValidationError(_('Unsigned document %s' % ref.reference))
                     self.stage_id =  4
     
-    def action_duplicate(self):
+    def create_account(self):
         rec_accnt = self.env['extenss.credit.account']
         exist_rec = rec_accnt.search([('customer_id', '=', self.partner_id.id)])
         if not exist_rec:
-            rec_accnt.create({
+            accnt_id = rec_accnt.create({
                 'customer_id': self.partner_id.id,
                 'date_opening': datetime.now().date(),
                 'status': 'active',
                 'balance': 0,
             })
+            return accnt_id.id
+        else:
+            return exist_rec.id
+        
+
+    def action_duplicate(self):
+        id_cuenta = self.create_account()
 
         record_new = self.env['extenss.credit']
         quotations_sale = self.env['sale.order'].search([('opportunity_id', '=', self.id),('state', '=', 'sale')])
@@ -239,9 +246,9 @@ class Lead(models.Model):
             ratif = amount_rec_val/(1+(rec_sale.tax_id/100))
             ratif_v = ratif*(rec_sale.tax_id/100)
 
-            reg_accnt = rec_accnt.search([('customer_id', '=', self.partner_id.id)])
-            for r in reg_accnt:
-                id_cuenta = r.id
+            # reg_accnt = rec_accnt.search([('customer_id', '=', self.partner_id.id)])
+            # for r in reg_accnt:
+            #     id_cuenta = r.id
 
             if rec_sale.base_interest_rate == 'TIIE':
                 base_rate_id = self.env['extenss.product.base_interest_rate'].search([('name', '=', rec_sale.base_interest_rate)])
@@ -582,6 +589,8 @@ class Lead(models.Model):
             self.env['mail.mail'].sudo().create(mail_value).send()
 
     def release_ff(self):
+        id_cuenta = self.create_account()
+        print(id_cuenta)
         prods_ids = self.env['extenss.product.product'].search([('product_tmpl_id', '=', self.catlg_product.id)])
         for prod_id in prods_ids:
             id_prod = prod_id.id
@@ -592,7 +601,7 @@ class Lead(models.Model):
             'product_id': id_prod,
             'salesperson_id': self.user_id.id,
             'office_id': self.team_id.id,
-            #'bill_id': id_cuenta,
+            'bill_id': id_cuenta,
             'amount_financed': self.amount_financed,
             'customer_type': self.partner_type,
             'ff': True,
@@ -611,7 +620,7 @@ class Lead(models.Model):
             'capacity': self.capacity,
             'days': self.days,
         })
-        print(credit_id)
+
         self.env['extenss.credit.amortization'].create({
             'credit_id': credit_id.id,
             'no_pay': 1,

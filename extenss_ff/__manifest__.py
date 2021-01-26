@@ -15,7 +15,7 @@
         'views/credit_ff_lines_active_view.xml',
         'views/credit_ff_dispersion_view.xml',
         'views/credit_ff_initial_pay_view.xml',
-        # 'views/credit_dn_exp_notice_view.xml',
+        'views/credit_ff_pre_notice_view.xml',
         # 'views/credit_dn_early_set_view.xml',
         # 'views/credit_dn_adv_pay_view.xml',
         # 'views/credit_dn_moras_view.xml',
