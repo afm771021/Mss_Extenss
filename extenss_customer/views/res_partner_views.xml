@@ -7,25 +7,26 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <field name="vat" position="after">
-                <field name="gender"/>
-                <field name="birth_date"/>
+                <field name="gender" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+                <field name="birth_date" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+                <field name="constitution_date" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
                 <field name="identification_type"/>
                 <field name="identification" placeholder="123456789"/>
                 <field name="country_birth" placeholder="e.g. México"/>
-                <field name="state_birth" placeholder="e.g. Ciudad de México"/>
-                <field name="marital_status" placeholder="e.g. Married"/>
+                <field name="state_birth" placeholder="e.g. Ciudad de México" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+                <field name="marital_status" placeholder="e.g. Married" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
                 <field name="occupation" placeholder="e.g. Programmer"/>
                 
                 <!--><field name="job_title" placeholder="e.g. Web Developer"/><-->
             </field>
             <field name="category_id" position="after">
                 <!--><field name='function'/><-->
-                <field name="politically_person"/>
-                <field name="housing_type"/>
-                <field name="years_residence"/>
-                <field name="level_study"/>
-                <field name="dependent_number"/>
-                <field name="ssn"/>
+                <field name="politically_person" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+                <field name="housing_type" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+                <field name="years_residence" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+                <field name="level_study" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+                <field name="dependent_number" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+                <field name="ssn" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
             </field>
 
             <field name="industry_id" position="after">
