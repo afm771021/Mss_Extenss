@@ -4,6 +4,14 @@ from odoo.exceptions import Warning, UserError, ValidationError
 import base64
 import math
 
+PROD_NAME = [
+    ('af','Arrendamiento Financiero'),
+    ('ap','Arrendamiento Puro'),
+    ('cs','Crédito Simple'),
+    ('DN','Descuento Nómina'),
+    ('LFF','Apertura de Factoraje Financiero'),
+    ('ff', 'Factoraje Financiero')]
+
 class ExtenssRequestDestination(models.Model):
     _name =  'extenss.request.destination'
     _order = 'name'
@@ -107,6 +115,10 @@ class Lead(models.Model):
     def _copy_data(self):
         self.ref_number = self.name + '-S'
 
+    @api.constrains('catlg_product')
+    def _copy_data_products(self):
+        self.tax_rate = self.catlg_product.taxes_id
+
     def open_docs_count(self):
         domain = ['|', ('lead_id', '=', [self.id]), ('partner_id', '=', self.partner_id.id)]
         return {
@@ -131,32 +143,46 @@ class Lead(models.Model):
         self.stage_id = 2
         
     def action_approved_sale(self):
-        self.user_send_req = self.env.user.id
-        if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '5')]).id:
-            #self.action_duplicate()
-            af = self.env['sale.order'].search([('opportunity_id', '=', self.id),('state', '=', 'sale')]).af
-            ap = self.env['sale.order'].search([('opportunity_id', '=', self.id),('state', '=', 'sale')]).ap
-            cs = self.env['sale.order'].search([('opportunity_id', '=', self.id),('state', '=', 'sale')]).cs
-            dn = self.env['sale.order'].search([('opportunity_id', '=', self.id),('state', '=', 'sale')]).dn
-            if af == True or ap == True:
-                if self.flag_initial_payment == True:
-                    self.stage_id = self.env['crm.stage'].search([('sequence', '=', '6')]).id
-                else:
-                    raise ValidationError(_('Initial payment is missing'))
-            elif cs == True:
-                self.stage_id = self.env['crm.stage'].search([('sequence', '=', '6')]).id
-            elif dn == True:
-                if self.flag_dispersion == True:
-                    self.stage_id = self.env['crm.stage'].search([('sequence', '=', '6')]).id
-                else:
+        if self.product_name == 'LFF' or self.product_name == 'ff':
+            if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '5')]).id:
+                if self.flag_dispersion == False and self.product_name == 'ff':
                     raise ValidationError(_('Dispersion is missing'))
-        if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '4')]).id:
-            self.send_notification()
-            self.stage_id = self.env['crm.stage'].search([('sequence', '=', '5')]).id
-        if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '3')]).id:
-            if self.flag_documents == False:
-                raise ValidationError(_('Please download the documents to continue'))
-            self.stage_id = self.env['crm.stage'].search([('sequence', '=', '4')]).id
+                if self.flag_initial_payment == False:
+                    raise ValidationError(_('Initial payment is missing'))
+                self.stage_id = self.env['crm.stage'].search([('sequence', '=', '6')]).id
+
+            if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '4')]).id:
+                self.stage_id = self.env['crm.stage'].search([('sequence', '=', '5')]).id
+
+            if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '3')]).id:
+                self.stage_id = self.env['crm.stage'].search([('sequence', '=', '4')]).id
+        else:
+            self.user_send_req = self.env.user.id
+            if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '5')]).id:
+                #self.action_duplicate()
+                af = self.env['sale.order'].search([('opportunity_id', '=', self.id),('state', '=', 'sale')]).af
+                ap = self.env['sale.order'].search([('opportunity_id', '=', self.id),('state', '=', 'sale')]).ap
+                cs = self.env['sale.order'].search([('opportunity_id', '=', self.id),('state', '=', 'sale')]).cs
+                dn = self.env['sale.order'].search([('opportunity_id', '=', self.id),('state', '=', 'sale')]).dn
+                if af == True or ap == True:
+                    if self.flag_initial_payment == True:
+                        self.stage_id = self.env['crm.stage'].search([('sequence', '=', '6')]).id
+                    else:
+                        raise ValidationError(_('Initial payment is missing'))
+                elif cs == True:
+                    self.stage_id = self.env['crm.stage'].search([('sequence', '=', '6')]).id
+                elif dn == True:
+                    if self.flag_dispersion == True:
+                        self.stage_id = self.env['crm.stage'].search([('sequence', '=', '6')]).id
+                    else:
+                        raise ValidationError(_('Dispersion is missing'))
+            if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '4')]).id:
+                self.send_notification()
+                self.stage_id = self.env['crm.stage'].search([('sequence', '=', '5')]).id
+            if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '3')]).id:
+                if self.flag_documents == False:
+                    raise ValidationError(_('Please download the documents to continue'))
+                self.stage_id = self.env['crm.stage'].search([('sequence', '=', '4')]).id
 
     def action_rejected_sale(self):
         self.user_refuse_req = self.env.user.id
@@ -318,8 +344,8 @@ class Lead(models.Model):
 
     def validations(self):
         if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '2')]).id:
-            count_sales = self.env['sale.order'].search_count([('opportunity_id', '=', self.id)])
-            if count_sales == 0:
+            count_sales = self.env['sale.order'].search_count([('opportunity_id', '=', self.id),('state', '=', 'sale')])
+            if count_sales == 0 and self.product_name != 'LFF':
                 raise ValidationError(_('Please add a quote'))
 
         docs = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', self.id)])
@@ -402,6 +428,9 @@ class Lead(models.Model):
                         raise ValidationError(_('Enter a Solidarity bound type record in Personal references tab for quotation number %s' % reg.name))
 
     def validate_docs_rec(self):
+        if self.product_name == 'ff':
+            self.release_ff()
+
         quotations = self.env['sale.order'].search([('opportunity_id', '=', self.id),('state', '=', 'sale')])
         for reg in quotations:
             #if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '6')]).id:
@@ -552,6 +581,50 @@ class Lead(models.Model):
                     }
             self.env['mail.mail'].sudo().create(mail_value).send()
 
+    def release_ff(self):
+        prods_ids = self.env['extenss.product.product'].search([('product_tmpl_id', '=', self.catlg_product.id)])
+        for prod_id in prods_ids:
+            id_prod = prod_id.id
+
+        credit_id = self.env['extenss.credit'].create({
+            'customer_id': self.partner_id.id,
+            'request_id': self.id,
+            'product_id': id_prod,
+            'salesperson_id': self.user_id.id,
+            'office_id': self.team_id.id,
+            #'bill_id': id_cuenta,
+            'amount_financed': self.amount_financed,
+            'customer_type': self.partner_type,
+            'ff': True,
+            'dispersion_date': datetime.now().date(),
+            'percentage_commission': self.commission_details,
+            'commission_amount': self.commissions,
+            'commission_vat': self.commission_vat,
+            'total_commission': self.total_commission,
+            'interest_rate': self.current_rate,
+            'first_payment_date': self.invoice_date,
+            'portfolio_type': 'vigente',
+            'credit_status': 'active',
+            'reference_number': self.name + '-C',
+            'init_date': self.init_date,
+            'invoice_date': self.invoice_date,
+            'capacity': self.capacity,
+            'days': self.days,
+        })
+        print(credit_id)
+        self.env['extenss.credit.amortization'].create({
+            'credit_id': credit_id.id,
+            'no_pay': 1,
+            'expiration_date': self.invoice_date,
+            'initial_balance': self.amount_financed,
+            'capital': self.amount_financed,
+            'interest': self.interest,
+            'iva_interest': self.interest_vat,
+            'payment': self.amount_financed + self.interest + self.interest_vat,
+            'penalty_amount': 0
+        })
+        #self.btn_active = False
+
     destination_id = fields.Many2one('extenss.request.destination', string='Destination loan', tracking=True, translate=True)
     name = fields.Char(string='Request number', required=True, copy=False, readonly=True, index=True, tracking=True, translate=True, default=lambda self: _('New'))
     sales_channel_id = fields.Many2one('extenss.request.sales_channel_id', string='Sales channel', tracking=True, translate=True)
@@ -594,12 +667,44 @@ class Lead(models.Model):
     btn_active = fields.Boolean(string='Button active', default=True, tracking=True, translate=True)
     ref_number = fields.Char(string='Reference number', tracking=True, translate=True)
 
-    product_name = fields.Selection([('af','Arrendamiento Financiero'),('ap','Arrendamiento Puro'),('cs','Crédito Simple'),('dn','Descuento Nómina')], string='Product', tracking=True, translate=True)
-    catlg_product = fields.Many2one('extenss.product.template', string='Product')#compute='_compute_catlg_prod', store=True
+    product_name = fields.Selection(PROD_NAME, string='Product', tracking=True, translate=True)
+    catlg_product = fields.Many2one('extenss.product.template', string='Product', domain="[('credit_type.shortcut', '=', product_name)]")#compute='_compute_catlg_prod', store=True
     perceptions = fields.Monetary(string='Perceptions', currency_field='company_currency', tracking=True, translate=True)
     deductions = fields.Monetary(string='Deductions', currency_field='company_currency', tracking=True, translate=True)
     payment_capacity = fields.Monetary(string='Payment capacity', currency_field='company_currency', tracking=True, translate=True)
     flag_dispersion = fields.Boolean(string='Dispersion', default=False, tracking=True, translate=True)
+
+    ######Factoraje Financiero
+    #product = fields.
+    amount_ff = fields.Monetary(string='Amount', currency_field='company_currency', tracking=True, translate=True)
+    amount_out_vat = fields.Monetary(string='Amount without VAT', currency_field='company_currency', compute='_compute_amount', store=True, tracking=True, translate=True)
+    purpose = fields.Char(string='Purpose', tracking=True, translate=True)
+    description_purpose = fields.Char(string='Description purpose', tracking=True, translate=True)
+
+    init_date = fields.Date(string='Init date', tracking=True, translate=True)
+    invoice_date = fields.Date(string='Invoice date', tracking=True, translate=True)
+    payment_method = fields.Char(string='Payment method', tracking=True, translate=True)
+    capacity = fields.Float('% Capacity', (2,6), tracking=True, translate=True)
+    amount_financed = fields.Monetary(string='Amount financed', currency_field='company_currency', compute='_compute_amount_financed',store=True, tracking=True, translate=True)
+    commission_details = fields.Float('Commission Details', (2,2), tracking=True, translate=True)
+    commissions = fields.Monetary(string='Commissions', currency_field='company_currency', compute='_compute_commission', store=True, tracking=True, translate=True)
+    commission_vat = fields.Monetary(string='Commissions VAT', currency_field='company_currency', tracking=True, translate=True)
+    total_commission = fields.Monetary(string='Initial payment', currency_field='company_currency', compute='_compute_total_commission', store=True, tracking=True, translate=True)
+    tax_rate = fields.Many2many('account.tax','crm_taxes_rel', 'crm_id', 'tax_id', tracking=True, translate=True)
+    fixed = fields.Boolean(string='Fixed', default=True, tracking=True, translate=True)
+    fixed_rate = fields.Float('Fixed rate', (2,6), tracking=True, translate=True)
+    base_rate = fields.Char(string='Base rate', tracking=True, translate=True)
+    variance = fields.Char(string='Variance', tracking=True, translate=True)
+    current_rate = fields.Float(string='Current rate', tracking=True, translate=True, compute='_compute_current_rate', store=True)
+    days = fields.Integer(string='Days', compute='_compute_days', store=True, tracking=True, translate=True)
+
+    amount_delivered = fields.Monetary(string='Amount delivered', currency_field='company_currency', compute='_compute_amount_delivered', store=True, tracking=True, translate=True)
+    total_available = fields.Monetary(string='Total available', currency_field='company_currency', tracking=True, translate=True)
+    total_willing = fields.Monetary(string='total willing', currency_field='company_currency', tracking=True, translate=True )
+
+    interest = fields.Monetary(string='Interest', currency_field='company_currency', compute='_compute_interest', store=True, tracking=True, translate=True)
+    interest_vat = fields.Monetary(string='Interest VAT', currency_field='company_currency', compute='_compute_interest_vat', store=True, tracking=True, translate=True)
+    total_payment = fields.Monetary(string='Total payment', currency_field='company_currency', compute='_compute_total_payment', store=True, tracking=True, translate=True)
 
     company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
     company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company.id)
@@ -608,6 +713,71 @@ class Lead(models.Model):
     # def _compute_catlg_prod(self):
     #     for reg in self:
     #         reg.catlg_product = reg.get('product_template_attribute_value_ids.name')
+    @api.depends('amount_ff')
+    def _compute_amount(self):
+        for reg in self:
+            rate_percent = (reg.tax_rate.amount/100)+1
+            reg.amount_out_vat = reg.amount_ff / rate_percent
+
+    @api.depends('amount_ff','capacity')
+    def _compute_amount_financed(self):
+        for reg in self:
+            rate_percent = (reg.capacity/100)+1
+            reg.amount_financed = reg.amount_out_vat / rate_percent
+
+    @api.depends('fixed_rate','amount_ff')
+    def _compute_current_rate(self):
+        for reg in self:
+            reg.current_rate = reg.fixed_rate
+
+    @api.depends('commission_details','amount_ff','capacity')
+    def _compute_commission(self):
+        for reg in self:
+            rate_percent = (reg.tax_rate.amount/100)
+            if reg.product_name == 'LFF':
+                reg.commissions = reg.amount_financed * (reg.commission_details/100)
+                reg.commission_vat = reg.commissions * rate_percent
+            if reg.product_name == 'ff':
+                reg.commissions = ((reg.commission_details/ 360) * reg.amount_financed) * reg.days
+                reg.commission_vat = reg.commissions * rate_percent
+
+    @api.depends('init_date','invoice_date')
+    def _compute_days(self):
+        for reg in self:
+            if reg.init_date and reg.invoice_date:
+                reg.days = (reg.invoice_date - reg.init_date).days
+            else:
+                reg.days = 0
+
+    @api.depends('amount_financed')
+    def _compute_interest(self):
+        for reg in self:
+            if reg.current_rate and reg.amount_financed and reg.days:
+                rate = reg.current_rate / 360
+                reg.interest = ((reg.amount_financed * rate)/360) * reg.days
+    
+    @api.depends('amount_financed','interest')
+    def _compute_interest_vat(self):
+        for reg in self:
+            if reg.interest and reg.tax_rate:
+                reg.interest_vat = reg.interest * (reg.tax_rate.amount/100)
+
+    @api.depends('amount_financed','interest','interest_vat')
+    def _compute_total_payment(self):
+        for reg in self:
+            if reg.interest and reg.interest_vat:
+                reg.total_payment = reg.interest + reg.interest_vat
+
+    @api.depends('commission_details','amount_financed')
+    def _compute_amount_delivered(self):
+        for reg in self:
+            if reg.commission_details and reg.amount_financed:
+                reg.amount_delivered = reg.amount_financed - reg.commissions - reg.commission_vat
+
+    @api.depends('commissions','commission_vat')
+    def _compute_total_commission(self):
+        for reg in self:
+            reg.total_commission = reg.commissions + reg.commission_vat
 
     @api.depends('rent','first_mortage','another_finantiation','risk_insurance','real_state_taxes','mortage_insurance','debts_cowners','other')
     def _compute_total_resident(self):
