@@ -8,7 +8,9 @@
     'application': True,
     'website': 'https://www.mss.mx',
     'category': 'Uncategorized',
-    'data': ['data/generate_accounting_cron.xml',
+    'data': [
+            'data/ir_sequence_data.xml',
+            'data/generate_accounting_cron.xml',
             'security/extenss_datamart_security.xml',
             'security/ir.model.access.csv',
             'views/datamart_menu.xml',
