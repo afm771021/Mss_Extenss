@@ -450,19 +450,35 @@
                                 <field name="init_date"/>
                                 <field name="invoice_date"/>
                                 <field name="payment_method"/>
-                                <field name="capacity"/>
+                                <label for="capacity"/>
+                                <div id="capacity" >
+                                    <field name="capacity" widget="float" class="oe_inline"/>
+                                    <span class="oe_grey">%%</span>
+                                </div>
                                 <field name="amount_financed" readonly="1"/>
-                                <field name="commission_details"/>
+                                <label for="commission_details"/>
+                                <div id="commission_details" >
+                                    <field name="commission_details" widget="float" class="oe_inline"/>
+                                    <span class="oe_grey">%%</span>
+                                </div>
                                 <field name="commissions"/>
                                 <field name="commission_vat" readonly="1"/>
                             </group>
                             <group>
                                 <field name="tax_rate" widget="many2many_tags" readonly="1"/>
                                 <field name="fixed" readonly="1"/>
-                                <field name="fixed_rate"/>
+                                <label for="fixed_rate"/>
+                                <div id="fixed_rate" >
+                                    <field name="fixed_rate" widget="float" class="oe_inline"/>
+                                    <span class="oe_grey">%%</span>
+                                </div>
                                 <field name="base_rate" readonly="1"/>
                                 <field name="variance" readonly="1"/>
-                                <field name="current_rate" readonly="1"/>
+                                <label for="current_rate"/>
+                                <div id="current_rate" >
+                                    <field name="current_rate" readonly="1" widget="float" class="oe_inline"/>
+                                    <span class="oe_grey">%%</span>
+                                </div>
                                 <field name="days" readonly="1"/>
                             </group>
                         </group>
@@ -482,19 +498,35 @@
                                 <field name="init_date"/>
                                 <field name="invoice_date"/>
                                 <field name="payment_method"/>
-                                <field name="capacity"/>
+                                <label for="capacity"/>
+                                <div id="capacity" >
+                                    <field name="capacity" widget="float" class="oe_inline"/>
+                                    <span class="oe_grey">%%</span>
+                                </div>
                                 <field name="amount_financed" readonly="1"/>
-                                <field name="commission_details"/>
+                                <label for="commission_details"/>
+                                <div id="commission_details" >
+                                    <field name="commission_details" widget="float" class="oe_inline"/>
+                                    <span class="oe_grey">%%</span>
+                                </div>
                                 <field name="commissions" readonly="1"/>
                                 <field name="commission_vat" readonly="1"/>
                             </group>
                             <group>
                                 <field name="tax_rate" widget="many2many_tags" readonly="1"/>
                                 <field name="fixed" readonly="1"/>
-                                <field name="fixed_rate" readonly="1"/>
+                                <label for="fixed_rate"/>
+                                <div id="fixed_rate" >
+                                    <field name="fixed_rate" readonly="1" widget="float" class="oe_inline"/>
+                                    <span class="oe_grey">%%</span>
+                                </div>
                                 <field name="base_rate" readonly="1"/>
                                 <field name="variance" readonly="1"/>
-                                <field name="current_rate" readonly="1"/>
+                                <label for="current_rate"/>
+                                <div id="current_rate" >
+                                    <field name="current_rate" readonly="1" widget="float" class="oe_inline"/>
+                                    <span class="oe_grey">%%</span>
+                                </div>
                                 <field name="days" readonly="1"/>
 
                                 <field name='interest' readonly="1"/>

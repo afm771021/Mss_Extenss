@@ -66,8 +66,8 @@ class Partner(models.Model):
                     raise ValidationError(_('The ssn must be a 11 digits'))
 
     #vat = fields.Char(string='Tax ID', translate=True)
-    gender = fields.Selection([('male', 'Male'),('female','Female')], string='Gender', default='', required=True, help="Select one option")
-    birth_date = fields.Date(string='Birth Date', required=True, translate=True)
+    gender = fields.Selection([('male', 'Male'),('female','Female')], string='Gender', help="Select one option")
+    birth_date = fields.Date(string='Birth Date', translate=True)
     identification_type = fields.Many2one('extenss.customer.identification_type', required=True)
     identification = fields.Char(string='Identification', required=True, translate=True)
     # country_birth = fields.Many2one('res.country', string='Country of birth', required=True, translate=True)
