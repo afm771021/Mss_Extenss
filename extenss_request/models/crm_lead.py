@@ -115,9 +115,9 @@ class Lead(models.Model):
     def _copy_data(self):
         self.ref_number = self.name + '-S'
 
-    @api.constrains('catlg_product')
-    def _copy_data_products(self):
-        self.tax_rate = self.catlg_product.taxes_id
+    # @api.constrains('catlg_product')
+    # def _copy_data_products(self):
+    #     self.tax_rate = self.catlg_product.taxes_id
 
     def open_docs_count(self):
         domain = ['|', ('lead_id', '=', [self.id]), ('partner_id', '=', self.partner_id.id)]
@@ -211,7 +211,6 @@ class Lead(models.Model):
             return accnt_id.id
         else:
             return exist_rec.id
-        
 
     def action_duplicate(self):
         id_cuenta = self.create_account()
@@ -632,7 +631,7 @@ class Lead(models.Model):
             'payment': self.amount_financed + self.interest + self.interest_vat,
             'penalty_amount': 0
         })
-        #self.btn_active = False
+        self.btn_active = False
 
     destination_id = fields.Many2one('extenss.request.destination', string='Destination loan', tracking=True, translate=True)
     name = fields.Char(string='Request number', required=True, copy=False, readonly=True, index=True, tracking=True, translate=True, default=lambda self: _('New'))
@@ -693,15 +692,15 @@ class Lead(models.Model):
     init_date = fields.Date(string='Init date', tracking=True, translate=True)
     invoice_date = fields.Date(string='Invoice date', tracking=True, translate=True)
     payment_method = fields.Char(string='Payment method', tracking=True, translate=True)
-    capacity = fields.Float('% Capacity', (2,6), tracking=True, translate=True)
+    capacity = fields.Float('% Capacity', (2,2), tracking=True, translate=True)
     amount_financed = fields.Monetary(string='Amount financed', currency_field='company_currency', compute='_compute_amount_financed',store=True, tracking=True, translate=True)
     commission_details = fields.Float('Commission Details', (2,2), tracking=True, translate=True)
     commissions = fields.Monetary(string='Commissions', currency_field='company_currency', compute='_compute_commission', store=True, tracking=True, translate=True)
     commission_vat = fields.Monetary(string='Commissions VAT', currency_field='company_currency', tracking=True, translate=True)
     total_commission = fields.Monetary(string='Initial payment', currency_field='company_currency', compute='_compute_total_commission', store=True, tracking=True, translate=True)
-    tax_rate = fields.Many2many('account.tax','crm_taxes_rel', 'crm_id', 'tax_id', tracking=True, translate=True)
+    tax_rate = fields.Many2many('account.tax','crm_taxes_rel', 'crm_id', 'tax_id', compute='_compute_catlg_product', store=True, tracking=True, translate=True)
     fixed = fields.Boolean(string='Fixed', default=True, tracking=True, translate=True)
-    fixed_rate = fields.Float('Fixed rate', (2,6), tracking=True, translate=True)
+    fixed_rate = fields.Float('Fixed rate', (2,2), tracking=True, translate=True)
     base_rate = fields.Char(string='Base rate', tracking=True, translate=True)
     variance = fields.Char(string='Variance', tracking=True, translate=True)
     current_rate = fields.Float(string='Current rate', tracking=True, translate=True, compute='_compute_current_rate', store=True)
@@ -722,6 +721,11 @@ class Lead(models.Model):
     # def _compute_catlg_prod(self):
     #     for reg in self:
     #         reg.catlg_product = reg.get('product_template_attribute_value_ids.name')
+    @api.depends('catlg_product')
+    def _compute_catlg_product(self):
+        for reg in self:
+            reg.tax_rate = self.catlg_product.taxes_id
+
     @api.depends('amount_ff')
     def _compute_amount(self):
         for reg in self:
@@ -758,10 +762,10 @@ class Lead(models.Model):
             else:
                 reg.days = 0
 
-    @api.depends('amount_financed')
+    @api.depends('amount_financed','days')
     def _compute_interest(self):
         for reg in self:
-            if reg.current_rate and reg.amount_financed and reg.days:
+            if reg.amount_financed and reg.days:
                 rate = reg.current_rate / 360
                 reg.interest = ((reg.amount_financed * rate)/360) * reg.days
     
@@ -807,7 +811,7 @@ class Lead(models.Model):
     owner_ids = fields.One2many('extenss.crm.lead.ownership', 'ownership_id', string=' ')
     surce_ids = fields.One2many('extenss.crm.lead.source_income', 'surce_id', string=' ')
     exp_ids = fields.One2many('extenss.crm.lead.source_income', 'gasto_id', string=' ')
-    personal_ref_ids = fields.One2many('extenss.customer.personal_ref', 'personal_ref_id', string=' ')
+    personal_ref_ids = fields.One2many('extenss.crm.personal_ref', 'personal_ref_id', string=' ')
 
 class ExtenssDocuments(models.Model):
     _inherit = "documents.document"
@@ -1023,15 +1027,45 @@ class ExtenssCrmLeadOwnership(models.Model):
     company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company.id)
 
 class ExtenssCrmPersonalReferences(models.Model):
-    _inherit = "extenss.customer.personal_ref"
+    _name = 'extenss.crm.personal_ref'
+    _description = 'Personal references'
+
+    @api.constrains('email_personal_ref', 'phone_personal_ref', 'cell_phone_personal_res')
+    def _check_fields_none(self):
+        for reg_pr in self:
+            if reg_pr.email_personal_ref == False and reg_pr.phone_personal_ref == False and reg_pr.cell_phone_personal_res == False:
+                raise ValidationError(_('Enter a value in any of the fields Phone, Cell phone or Email in tab Personal references'))
+    
+    @api.constrains('phone_personal_ref')
+    def _check_phone_personal(self):
+        for reg in self:
+            if not reg.phone_personal_ref == False:
+                digits = [int(x) for x in reg.phone_personal_ref if x.isdigit()]
+                if len(digits) != 10:
+                    raise ValidationError(_('The phone must be a 10 digits in tab Personal references'))
+
+    @api.constrains('cell_phone_personal_res')
+    def _check_cell_phone_res(self):
+        for reg_cell in self:
+            if not reg_cell.cell_phone_personal_res == False:
+                digits1 = [int(x) for x in reg_cell.cell_phone_personal_res if x.isdigit()]
+                if len(digits1) != 10:
+                    raise ValidationError(_('The cell phone must be a 10 digits in tab Personal references'))
+
+    @api.constrains('email_personal_ref')
+    def _check_email_personal_ref(self):
+        for reg_ref in self:
+            if not reg_ref.email_personal_ref == False:
+                reg_ref.email_personal_ref.replace(" ","")
+                if not re.match(r"[^@]+@[^@]+\.[^@]+", reg_ref.email_personal_ref):
+                    raise ValidationError(_('Please enter valid email address in tab Personal references'))
 
     personal_ref_id = fields.Many2one('crm.lead')#modelo padre
-    # type_reference_personal_ref = fields.Many2one('extenss.customer.type_refbank', string='Type reference', required=True,translate=True)
-    # #type_reference_personal_ref = fields.Char(string='Type reference', required=True,translate=True)
-    # reference_name_personal_ref = fields.Char(string='Reference name', required=True, translate=True)
-    # phone_personal_ref = fields.Char(string='Phone', translate=True)
-    # cell_phone_personal_res = fields.Char(string='Cell phone', translate=True)
-    # email_personal_ref = fields.Char(string='Email', translate=True)
+    type_reference_personal_ref = fields.Many2one('extenss.customer.type_refbank', string='Type reference', required=True,translate=True)
+    reference_name_personal_ref = fields.Char(string='Reference name', required=True, translate=True)
+    phone_personal_ref = fields.Char(string='Phone', translate=True)
+    cell_phone_personal_res = fields.Char(string='Cell phone', translate=True)
+    email_personal_ref = fields.Char(string='Email', translate=True)
 
 class ExtenssCrmConciliation(models.Model):
     _name = 'extenss.crm.conciliation'

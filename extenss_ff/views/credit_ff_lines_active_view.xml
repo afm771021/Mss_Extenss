@@ -25,14 +25,11 @@
                 <sheet>
                     <group>
                         <group>
-                        <field name="name" readonly="1"/>
-                        <field name="partner_id" options="{'no_open': True}" readonly="1"/>
-                        <field name="stage_id" options="{'no_open': True}" readonly="1"/>
-                        <field name="company_id" options="{'no_open': True}" readonly="1"/>
-                        <field name="team_id" options="{'no_open': True}" readonly="1"/>
-                        <!-- <field name="dn_s" invisible="1"/>
-                        <field name="productid" invisible="1"/>
-                        <field name="flag_dispersion" invisible="1"/> -->
+                            <field name="name" readonly="1"/>
+                            <field name="partner_id" options="{'no_open': True}" readonly="1"/>
+                            <field name="stage_id" options="{'no_open': True}" readonly="1"/>
+                            <field name="company_id" options="{'no_open': True}" readonly="1"/>
+                            <field name="team_id" options="{'no_open': True}" readonly="1"/>
                         </group>
 
                         <group>
@@ -72,14 +69,20 @@
                                 </form>
                                 <field name="lineff_ids" options="{'no_create': True}" domain="[('status', '=', 'pending'),('amount', '&lt;', 0)]">
                                     <tree editable="bottom">
-                                        <field name="lineff_id" options="{'no_open': False}"/>
-                                        <field name="name"/>
+                                        <field name="lineff_id" invisible="1"/>
+                                        <field name="name" options="{'no_open': False}"/>
+                                        <field name="partner_id" options="{'no_open': True}" readonly="1"/>
+                                        <field name="stage_id" options="{'no_open': True}" readonly="1"/>
+                                        <field name="company_id" options="{'no_open': True}" readonly="1"/>
                                     </tree>
                                     <form>
                                         <sheet>
                                             <group>
                                                 <field name="name"/>
-                                                <field name="lineff_id"/>
+                                                <field name="partner_id" options="{'no_open': True}" readonly="1"/>
+                                                <field name="stage_id" options="{'no_open': True}" readonly="1"/>
+                                                <field name="company_id" options="{'no_open': True}" readonly="1"/>
+                                                <field name="lineff_id" invisible="1"/>
                                             </group>
                                         </sheet>
                                     </form>
