@@ -32,16 +32,16 @@ class Datamart(models.Model):
     ##Proceso para enviar los registros a la contabilidad
     def action_send_account(self):
         ###, partnerid, amount_trans, accountid
-        regs_lines = self.env['extenss.datamart.lines'].search([('check', '=', True),('status', '=', 'to_send')])
+        regs_lines = self.env['extenss.datamart.lines'].search([('check', '=', True)])
         for reg_line in regs_lines:
             reg_catalogs = self.env['extenss.datamart.contable_events'].search([('event_key', '=', reg_line.type_line)])
             if reg_catalogs:
                 new_aml_dicts = []
                 id_acc_mov = self.env['account.move'].sudo().create({
-                    'name': reg_line.name,
-                    #'ref': 'Prueba',
+                    'name': datetime.now().date(),
+                    'ref': 'Prueba',
                     'date': datetime.now().date(),
-                    'journal_id': reg_catalogs.journal_id.id,
+                    'journal_id': 7,
                     'state': 'draft',
                     'type': 'entry',
                     'to_check': 'false',
@@ -121,12 +121,11 @@ class DatamartLines(models.Model):
     _name = 'extenss.datamart.lines'
     _description = 'Datamart lines'
 
-    name = fields.Char(string='Name', copy=False, readonly=True, index=True, tracking=True, translate=True, default=lambda self: _('New'))
     datamart_id = fields.Many2one('extenss.datamart', string='Datamart id')
     check = fields.Boolean(string='Selected', default=False, tracking=True, translate=True)
     account_id = fields.Many2one('account.account', string='Account', tracking=True, translate=True)
     partner_id = fields.Many2one('res.partner', string='Customer', tracking=True, translate=True)
-    description = fields.Char(string='Description', tracking=True, translate=True)
+    name = fields.Char(string='Description', tracking=True, translate=True)
     product_id = fields.Many2one('extenss.product.product', string='Product', tracking=True, translate=True)
     credit_id = fields.Many2one('extenss.credit', tracking=True, translate=True)
     amount = fields.Monetary(string='Amount', currency_field='company_currency', tracking=True, translate=True)
@@ -137,15 +136,6 @@ class DatamartLines(models.Model):
 
     company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
     company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company.id)
-
-    @api.model
-    def create(self, reg):
-        if reg:
-            if reg.get('name', _('New')) == _('New'):
-                reg['name'] = self.env['ir.sequence'].next_by_code('extenss.datamart.lines') or _('New')
-            result = super(DatamartLines, self).create(reg)
-            return result
-
 
 class ExtenssDatamartContableEvents(models.Model):
     _name = 'extenss.datamart.contable_events'
