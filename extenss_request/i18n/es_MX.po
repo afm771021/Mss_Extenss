@@ -6,14 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0+e-20200316\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-08 20:37+0000\n"
-"PO-Revision-Date: 2021-01-08 20:37+0000\n"
+"POT-Creation-Date: 2021-01-28 02:14+0000\n"
+"PO-Revision-Date: 2021-01-27 20:34-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"Language: es_MX\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
@@ -22,35 +24,35 @@ msgstr ""
 
 #. module: extenss_request
 #: model:mail.template,subject:extenss_request.extenss_request_email_template
-msgid ""
-"${object.company_id.name} ${object.state in ('draft', 'sent') and "
-"'Quotation' or 'Order'} (Ref ${object.name or 'n/a' })"
-msgstr ""
-"${object.company_id.name} ${object.state in ('draft', 'sent') and "
-"'Presupuesto' or 'Pedido'} (Ref ${object.name or 'n/a' })"
+msgid "${object.company_id.name} ${object.state in ('draft', 'sent') and 'Quotation' or 'Order'} (Ref ${object.name or 'n/a' })"
+msgstr "${object.company_id.name} ${object.state in ('draft', 'sent') and 'Presupuesto' or 'Pedido'} (Ref ${object.name or 'n/a' })"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid ""
 "% \n"
 "                                  fijo"
 msgstr ""
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__capacity
+msgid "% Capacity"
+msgstr "% Aforo"
+
+#. module: extenss_request
 #: model:ir.actions.report,print_report_name:extenss_request.contrato_extenss_request_sale_order
 msgid "'Contrato %s' % (object.name)"
-msgstr ""
+msgstr "‘Contrato %s’ % (object.name)"
 
 #. module: extenss_request
 #: model:ir.actions.report,print_report_name:extenss_request.pagare_extenss_request_sale_order
 msgid "'Pagare %s' % (object.name)"
-msgstr ""
+msgstr "‘Pagare %s’ % (object.name)"
 
 #. module: extenss_request
 #: model:ir.actions.report,print_report_name:extenss_request.report_extenss_request_sale_order
 msgid "'Quotation %s' % (object.name)"
-msgstr ""
+msgstr "‘Cotización %s’ % (object.name)"
 
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.pagare_amortization
@@ -106,16 +108,14 @@ msgid ""
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid ""
 "<br/>\n"
 "                                pesos, M.N."
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid ""
 "<br/>\n"
 "                                pesos, M.N.\n"
@@ -124,16 +124,14 @@ msgid ""
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid ""
 "<br/>\n"
 "                            Fecha de corte: ______________________________________"
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid ""
 "<br/>\n"
 "                            Tipo de Crédito:"
@@ -185,7 +183,8 @@ msgid ""
 "                    <div style=\"float: right;color:red;\">SCR ${object.name}</div>\n"
 "                    <div style=\"margin: 0 auto; width: 100px;\"><br/> </div>\n"
 "                    <div style=\"float: right\">No. Cliente: ___________</div>\n"
-"                    <div style=\"float: left\"><img t-attf-src=\"/web/binary/company_logo?company={{ res_company.id }}\" height=\"75px\" width=\"290px\"/></div>\n"
+"                    <div style=\"float: left\"><img t-attf-src=\"/web/binary/company_logo?company={{ res_company.id }}\" height=\"75px\" "
+"width=\"290px\"/></div>\n"
 "                    <div style=\"margin: 0 auto; width: 100px;color:red;\">CÁRATULA DE CRÉDITO</div>\n"
 "                    <div style=\"float: right\">Fecha: ${object.date_start}</div>\n"
 "                </div>\n"
@@ -254,7 +253,8 @@ msgid ""
 "                        </td>\n"
 "                    </tr>\n"
 "                    <tr>\n"
-"                        <td colspan=\"4\" style=\"border:2px solid #149448;text-align: center;background-color:#149448;color:white;border-collapse: collapse;\">\n"
+"                        <td colspan=\"4\" style=\"border:2px solid #149448;text-align: center;background-color:#149448;color:white;border-"
+"collapse: collapse;\">\n"
 "                            COMISIONES RELEVANTES\n"
 "                        </td>\n"
 "                    </tr>\n"
@@ -264,19 +264,22 @@ msgid ""
 "                        </td>\n"
 "                    </tr>\n"
 "                    <tr>\n"
-"                        <td colspan=\"4\" style=\"border:2px solid #EE1C25;background-color:#EE1C25;color:white;border-collapse: collapse;padding: 20px;text-align: center;\">\n"
+"                        <td colspan=\"4\" style=\"border:2px solid #EE1C25;background-color:#EE1C25;color:white;border-collapse: collapse;"
+"padding: 20px;text-align: center;\">\n"
 "                            ADVERTENCIAS\n"
 "                        </td>\n"
 "                    </tr>\n"
 "                    <tr>\n"
-"                        <td colspan=\"4\" style=\"border:2px solid #EE1C25;background-color:#EE1C25;color:white;border-collapse: collapse;padding: 20px;\">\n"
+"                        <td colspan=\"4\" style=\"border:2px solid #EE1C25;background-color:#EE1C25;color:white;border-collapse: collapse;"
+"padding: 20px;\">\n"
 "                            “Incumplir tus obligaciones te puede generar comisiones”.\n"
 "                            <br/>\n"
 "                            “Contratar créditos que excedan tu capacidad de pago afecta tu historial crediticio”.\n"
 "                        </td>\n"
 "                    </tr>\n"
 "                    <tr>\n"
-"                        <td colspan=\"4\" style=\"border:2px solid #149448;text-align: center;background-color:#149448;color:white;border-collapse: collapse;\">\n"
+"                        <td colspan=\"4\" style=\"border:2px solid #149448;text-align: center;background-color:#149448;color:white;border-"
+"collapse: collapse;\">\n"
 "                            SEGUROS\n"
 "                        </td>\n"
 "                    </tr>\n"
@@ -304,7 +307,8 @@ msgid ""
 "                            <br/>\n"
 "                            Unidad Especializada de Atención a Usuarios de TBY\n"
 "                            <br/>\n"
-"                            Domicilio: Av. José María Morelos y Pavón número 707, Interior 18, Colonia la Merced, Toluca de Lerdo, Estado de México, Código Postal 50080.\n"
+"                            Domicilio: Av. José María Morelos y Pavón número 707, Interior 18, Colonia la Merced, Toluca de Lerdo, Estado "
+"de México, Código Postal 50080.\n"
 "                            <br/>\n"
 "                            Teléfono: 01800 509 7829 Correo electrónico: une@tby.com.mx\n"
 "                            <br/>\n"
@@ -326,14 +330,18 @@ msgid ""
 msgstr ""
 
 #. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_my_home_menu_ext_request
+msgid "<em>Request</em>"
+msgstr ""
+
+#. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
 msgid "<p>Solicitud: %s ,</p><p>Cliente: %s ,</p><p>Monto: %s ,</p>"
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "ADVERTENCIAS"
 msgstr ""
 
@@ -395,14 +403,14 @@ msgid "Accumulated profit (loss)"
 msgstr "Ganancia acumulada (pérdida)"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid ""
 "Aclaraciones y reclamaciones:\n"
 "                            <br/>\n"
 "                            Unidad Especializada de Atención a Usuarios de TBY\n"
 "                            <br/>\n"
-"                            Domicilio: Av. José María Morelos y Pavón número 707, Interior 18, Colonia la Merced, Toluca de Lerdo, Estado de México, Código Postal 50080.\n"
+"                            Domicilio: Av. José María Morelos y Pavón número 707, Interior 18, Colonia la Merced, Toluca de Lerdo, Estado "
+"de México, Código Postal 50080.\n"
 "                            <br/>\n"
 "                            Teléfono: 01800 509 7829 Correo electrónico: une@tby.com.mx\n"
 "                            <br/>\n"
@@ -418,18 +426,13 @@ msgstr "Activación"
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
 msgid "Add a beneficiary type record in the Personal References tab"
-msgstr ""
-"Agregue un registro de tipo de beneficiario en la pestaña Referencias "
-"personales"
+msgstr "Agregue un registro de tipo de beneficiario en la pestaña Referencias personales"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
-msgid ""
-"Add a record of type bound by solidarity in the Personal References tab"
-msgstr ""
-"Agregue un registro de tipo Obligado solidario en la pestaña Referencias "
-"personales"
+msgid "Add a record of type bound by solidarity in the Personal References tab"
+msgstr "Agregue un registro de tipo Obligado solidario en la pestaña Referencias personales"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
@@ -455,7 +458,7 @@ msgstr "Activo adicional 2 Monto"
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__activo_adicional2_tipo
 msgid "Additional asset 2 Type"
-msgstr "Activo adicional 2 Tipo\n"
+msgstr "Activo adicional 2 Tipo"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__gastos_ope_ad_1_importe
@@ -505,6 +508,7 @@ msgid "Amotization"
 msgstr "Amortización"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__amount_ff
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_conciliation_lines__amount
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_source_income__importe_gas
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_source_income__importe_ing
@@ -512,9 +516,24 @@ msgid "Amount"
 msgstr "Importe"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__amount_delivered
+msgid "Amount delivered"
+msgstr ""
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__amount_financed
+msgid "Amount financed"
+msgstr "Monto financiado"
+
+#. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__amount_si
 msgid "Amount s/iva"
 msgstr "Monto s/iva"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__amount_out_vat
+msgid "Amount without VAT"
+msgstr "Monto sin IVA"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__another_finantiation
@@ -525,6 +544,11 @@ msgstr "Otra financiación"
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__ap
 msgid "Ap"
 msgstr ""
+
+#. module: extenss_request
+#: model:ir.model.fields.selection,name:extenss_request.selection__crm_lead__product_name__lff
+msgid "Apertura de Factoraje Financiero"
+msgstr "Apertura de Factoraje Financiero"
 
 #. module: extenss_request
 #: model:ir.model.fields.selection,name:extenss_request.selection__extenss_crm_conciliation_lines__status__applied
@@ -539,18 +563,17 @@ msgstr "Aprobado"
 #. module: extenss_request
 #: model:ir.model.fields.selection,name:extenss_request.selection__crm_lead__product_name__af
 msgid "Arrendamiento Financiero"
-msgstr ""
+msgstr "Arrendamiento Financiero"
 
 #. module: extenss_request
 #: model:ir.model.fields.selection,name:extenss_request.selection__crm_lead__product_name__ap
 msgid "Arrendamiento Puro"
-msgstr ""
+msgstr "Arrendamiento Puro"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Aseguradora: No aplica."
-msgstr ""
+msgstr "Aseguradora: No aplica."
 
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
@@ -583,12 +606,17 @@ msgstr "Usuario autorizado"
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__base
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_base__name
 msgid "Base"
-msgstr ""
+msgstr "Base"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__base_interest_rate
 msgid "Base Interest Rate"
 msgstr "Tasa de interés base"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__base_rate
+msgid "Base rate"
+msgstr "Tasa base"
 
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
@@ -611,8 +639,7 @@ msgid "CAT"
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid ""
 "CAT \n"
 "                            <br/>\n"
@@ -620,8 +647,7 @@ msgid ""
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "COMISIONES RELEVANTES"
 msgstr ""
 
@@ -719,8 +745,8 @@ msgid ""
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
-#: model_terms:ir.ui.view,arch_db:extenss_request.sale_order_form_extend
+#: model:ir.model.fields,field_description:extenss_request.field_sale_order__calculate
+#: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend model_terms:ir.ui.view,arch_db:extenss_request.sale_order_form_extend
 msgid "Calculate"
 msgstr "Calcular"
 
@@ -732,8 +758,7 @@ msgstr "Base de cálculo"
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__capital
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization__capital
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Capital"
 msgstr "Capital"
 
@@ -751,6 +776,11 @@ msgid "Category"
 msgstr "Categoría"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref__cell_phone_personal_res
+msgid "Cell phone"
+msgstr "Teléfono móvil"
+
+#. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__verifica_importes
 msgid "Check amounts"
 msgstr "Verificar montos"
@@ -759,6 +789,11 @@ msgstr "Verificar montos"
 #: model_terms:ir.ui.view,arch_db:extenss_request.pagare_amortization
 msgid "Ciudad de México, a _"
 msgstr ""
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Cliente"
+msgstr "Cliente"
 
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.contrato_amortization
@@ -847,8 +882,7 @@ msgid "Closed date"
 msgstr "Fecha de cierre"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Cláusula: No aplica."
 msgstr ""
 
@@ -869,7 +903,22 @@ msgstr "Comisión"
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_commision__value_commision
 msgid "Commision Value"
-msgstr "Valor de la comisión\n"
+msgstr "Valor de la comisión"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__commission_details
+msgid "Commission Details"
+msgstr "Detalles de la comisión"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__commissions
+msgid "Commissions"
+msgstr "Comisiones"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__commission_vat
+msgid "Commissions VAT"
+msgstr "IVA comisiones"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__company_id
@@ -892,6 +941,11 @@ msgid "Company Type"
 msgstr "Tipo de compañía"
 
 #. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Company:"
+msgstr "Compañía:"
+
+#. module: extenss_request
 #: model:ir.actions.act_window,name:extenss_request.action_menu_conciliation
 #: model:ir.model,name:extenss_request.model_extenss_crm_conciliation
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_conciliation_lines__conciliation_id
@@ -906,6 +960,7 @@ msgid "Conciliation Lines"
 msgstr "Líneas de conciliación"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_sale_order__confirm
 #: model_terms:ir.ui.view,arch_db:extenss_request.view_form_extenss_crm_concilation
 msgid "Confirm"
 msgstr "Confirmar"
@@ -927,6 +982,7 @@ msgstr "Fecha de Creación"
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__create_uid
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_ownership__create_uid
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_source_income__create_uid
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref__create_uid
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization__create_uid
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_base__create_uid
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_category_act__create_uid
@@ -949,6 +1005,7 @@ msgstr "Creado por"
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__create_date
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_ownership__create_date
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_source_income__create_date
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref__create_date
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization__create_date
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_base__create_date
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_category_act__create_date
@@ -974,7 +1031,7 @@ msgstr "Tipo de crédito"
 #: model:ir.cron,cron_name:extenss_request.ir_cron_create_conciliation_request
 #: model:ir.cron,name:extenss_request.ir_cron_create_conciliation_request
 msgid "Credit: create conciliation request"
-msgstr "Credito: crear conciliación solicitud"
+msgstr ""
 
 #. module: extenss_request
 #: model:ir.model.fields.selection,name:extenss_request.selection__crm_lead__product_name__cs
@@ -985,6 +1042,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__cs
 msgid "Cs"
 msgstr ""
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Cuota"
+msgstr "Cuota"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__company_currency
@@ -1026,6 +1088,11 @@ msgid "Current household expenses"
 msgstr "Gastos corrientes del hogar"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__current_rate
+msgid "Current rate"
+msgstr "Tasa actual"
+
+#. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__partner_id
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_conciliation_lines__customer
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__partner_id
@@ -1034,21 +1101,36 @@ msgid "Customer"
 msgstr "Cliente"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Customer:"
+msgstr "Cliente:"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "CÁRATULA DE CRÉDITO"
 msgstr ""
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__dn
 msgid "DN"
-msgstr "DN"
+msgstr ""
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_conciliation_lines__date
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__date_fin_sit
 msgid "Date"
 msgstr "Fecha"
+
+#. module: extenss_request
+#: code:addons/extenss_request/controllers/portal.py:0
+#, python-format
+msgid "DateTime"
+msgstr "Fecha y hora"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__days
+msgid "Days"
+msgstr "Días"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__days_past_due
@@ -1087,6 +1169,11 @@ msgid "Description"
 msgstr "Descripción"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__description_purpose
+msgid "Description purpose"
+msgstr "Descripción de propósito"
+
+#. module: extenss_request
 #: model:ir.model.fields.selection,name:extenss_request.selection__crm_lead__product_name__dn
 msgid "Descuento Nómina"
 msgstr "Descuento Nómina"
@@ -1096,7 +1183,7 @@ msgstr "Descuento Nómina"
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__destination_id
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_destination__name
 msgid "Destination loan"
-msgstr " Destino del préstamo"
+msgstr "Destino del préstamo"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_commision__detali_commision
@@ -1111,7 +1198,7 @@ msgstr "Desembolso de capital"
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__flag_dispersion
 msgid "Dispersion"
-msgstr "Dispersion"
+msgstr "Dispersión"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
@@ -1126,6 +1213,7 @@ msgstr "Falta dispersión"
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__display_name
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_ownership__display_name
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_source_income__display_name
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref__display_name
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization__display_name
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_base__display_name
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_category_act__display_name
@@ -1149,11 +1237,10 @@ msgstr "Documento"
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_documents_document__doc_prod_id
 msgid "Document Prod Id"
-msgstr "Document Prod Id"
+msgstr ""
 
 #. module: extenss_request
-#: code:addons/extenss_request/models/crm_lead.py:0
-#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__document_count
+#: code:addons/extenss_request/models/crm_lead.py:0 model:ir.model.fields,field_description:extenss_request.field_crm_lead__document_count
 #: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
 #, python-format
 msgid "Documents"
@@ -1165,8 +1252,7 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid ""
 "ESTADO DE CUENTA:\n"
 "                            <br/>\n"
@@ -1174,75 +1260,76 @@ msgid ""
 msgstr ""
 
 #. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Ejecutive:"
+msgstr ""
+
+#. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.pagare_amortization
 msgid ""
 "El Deudor, en forma expresa, desde ahora: (i) autoriza al Acreedor y/o a cualquier tenedor subsecuente (en adelante, el \n"
-"                “Tenedor”), para que endose(n) y/o transmita(n) y/o descuente(n) y/o transfiera(n) y/o ceda(n) y/o negocie(n) y/o afecte(n)\n"
-"                y/o grave(n) este pagaré y los derechos de crédito que ampara, en cualquier tiempo y lugar, sirviendo el presente como la \n"
-"                más amplia y necesaria autorización del Deudor al respecto; (ii) renuncia expresamente a lo establecido en el segundo párrafo\n"
-"                del artículo 299 de la Ley General de Títulos y Operaciones de Crédito; (iii) amplía el plazo de presentación de este pagaré, \n"
-"                para que su pago pueda efectuarse dentro del plazo de 1 (un) año posterior a la fecha del último pago parcial previsto; y, (iv) \n"
-"                autoriza al Acreedor y/o al Tenedor para que, en caso de que el Deudor omita liquidar cualquiera de las parcialidades pactadas, \n"
-"                en la fecha de pago de que se trate, pueda(n) dar válidamente por vencido anticipadamente el plazo establecido en el presente \n"
+"                “Tenedor”), para que endose(n) y/o transmita(n) y/o descuente(n) y/o transfiera(n) y/o ceda(n) y/o negocie(n) y/o "
+"afecte(n)\n"
+"                y/o grave(n) este pagaré y los derechos de crédito que ampara, en cualquier tiempo y lugar, sirviendo el presente como "
+"la \n"
+"                más amplia y necesaria autorización del Deudor al respecto; (ii) renuncia expresamente a lo establecido en el segundo "
+"párrafo\n"
+"                del artículo 299 de la Ley General de Títulos y Operaciones de Crédito; (iii) amplía el plazo de presentación de este "
+"pagaré, \n"
+"                para que su pago pueda efectuarse dentro del plazo de 1 (un) año posterior a la fecha del último pago parcial previsto; "
+"y, (iv) \n"
+"                autoriza al Acreedor y/o al Tenedor para que, en caso de que el Deudor omita liquidar cualquiera de las parcialidades "
+"pactadas, \n"
+"                en la fecha de pago de que se trate, pueda(n) dar válidamente por vencido anticipadamente el plazo establecido en el "
+"presente \n"
 "                pagaré y, por lo tanto, el Deudor estará obligado a pagar al Acreedor y/o al Tenedor, el saldo insoluto pendiente de pago."
 msgstr ""
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref__email_personal_ref
+msgid "Email"
+msgstr "Correo electrónico"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Email:"
+msgstr "Correo electrónico:"
+
+#. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization__date_end
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "End Date"
 msgstr "Fecha final"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
-msgid ""
-"Enter a Beneficiaries type record in Personal references tab for quotation "
-"number %s"
-msgstr ""
-"Ingrese un registro de tipo de Beneficiarios en la pestaña Referencias "
-"personales para el número de cotización %s"
+msgid "Enter a Beneficiaries type record in Personal references tab for quotation number %s"
+msgstr "Ingrese un registro de tipo de Beneficiarios en la pestaña Referencias personales para el número de cotización %s"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
-msgid ""
-"Enter a Endorsement type record in Personal references tab for quotation "
-"number %s"
-msgstr ""
-"Ingrese un registro de tipo de Aval en la pestaña Referencias personales "
-"para el número de cotización %s"
+msgid "Enter a Endorsement type record in Personal references tab for quotation number %s"
+msgstr "Ingrese un registro de tipo de Aval en la pestaña Referencias personales para el número de cotización %s"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
-msgid ""
-"Enter a Solidarity bound type record in Personal references tab for "
-"quotation number %s"
-msgstr ""
-"Ingrese un registro de tipo Obligado solidario en la pestaña Referencias "
-"personales para el número de cotización %s"
+msgid "Enter a Solidarity bound type record in Personal references tab for quotation number %s"
+msgstr "Ingrese un registro de tipo Obligado solidario en la pestaña Referencias personales para el número de cotización %s"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
-msgid ""
-"Enter a record in Financial position tab in the section Assets for quotation"
-" number %s"
-msgstr ""
-"Ingrese un registro en la pestaña Posición financiera en la sección Activos "
-"para el número de cotización %s"
+msgid "Enter a record in Financial position tab in the section Assets for quotation number %s"
+msgstr "Ingrese un registro en la pestaña Posición financiera en la sección Activos para el número de cotización %s"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
-msgid ""
-"Enter a record in Financial position tab in the section Passives for "
-"quotation number %s"
-msgstr ""
-"Ingrese un registro en la pestaña Posición financiera en la sección Pasivos "
-"para el número de cotización %s"
+msgid "Enter a record in Financial position tab in the section Passives for quotation number %s"
+msgstr "Ingrese un registro en la pestaña Posición financiera en la sección Pasivos para el número de cotización %s"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
@@ -1254,50 +1341,43 @@ msgstr "Ingrese un registro en la pestaña Situación financiera"
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
 msgid "Enter a record in Ownership tab %s"
-msgstr "Ingrese un registro en la pestaña Propiedad"
+msgstr "Ingrese un registro en la pestaña Propiedad %s"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
-msgid ""
-"Enter a record in Source income tab in the section of Expenses for quotation"
-" number %s"
-msgstr ""
-"Ingrese un registro en la pestaña Ingresos de origen en la sección Gastos "
-"para el número de cotización% s"
+msgid "Enter a record in Source income tab in the section of Expenses for quotation number %s"
+msgstr "Ingrese un registro en la pestaña Ingresos de origen en la sección Gastos para el número de cotización% s"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
-msgid ""
-"Enter a record in Source income tab in the section of Income for quotation "
-"number %s"
-msgstr ""
-"Ingrese un registro en la pestaña Ingresos de origen en la sección Ingresos "
-"para el número de cotización %s"
+msgid "Enter a record in Source income tab in the section of Income for quotation number %s"
+msgstr "Ingrese un registro en la pestaña Ingresos de origen en la sección Ingresos para el número de cotización %s"
+
+#. module: extenss_request
+#: code:addons/extenss_request/models/crm_lead.py:0
+#, python-format
+msgid "Enter a value in any of the fields Phone, Cell phone or Email in tab Personal references"
+msgstr "Ingrese un valor en cualquiera de los campos Teléfono, Teléfono celular o Correo electrónico en la pestaña Referencias personales"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
 msgid "Enter data in Income statement tab in any of the sections"
-msgstr ""
-"Ingrese los datos en la pestaña Estado de resultados en cualquiera de las "
-"secciones"
+msgstr "Ingrese los datos en la pestaña Estado de resultados en cualquiera de las secciones"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
 msgid "Enter data in Liabilities tab in any of the sections"
-msgstr ""
-"Ingrese los datos en la pestaña Pasivos en cualquiera de las secciones"
+msgstr "Ingrese los datos en la pestaña Pasivos en cualquiera de las secciones"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
 msgid "Enter data in Residence profile tab for quotation number %s"
-msgstr ""
-"Ingrese los datos en la pestaña Perfil de residencia para el número de "
-"presupuesto %s"
+msgstr "Ingrese los datos en la pestaña Perfil de residencia para el número de presupuesto %s"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
@@ -1328,7 +1408,7 @@ msgstr "Extenss Comisión"
 #. module: extenss_request
 #: model:ir.module.category,name:extenss_request.module_category_extenss_request
 msgid "Extenss Request"
-msgstr "Extenss Solicitud"
+msgstr "Extenss Request"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__product_no_variant_attribute_value_ids
@@ -1341,17 +1421,25 @@ msgid "Factor"
 msgstr "Factor"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
-msgid "Fecha límite de pago:"
-msgstr ""
+#: model:ir.model.fields.selection,name:extenss_request.selection__crm_lead__product_name__ff
+msgid "Factoraje Financiero"
+msgstr "Factoraje Financiero"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.pagare_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Fecha de primer pago"
+msgstr "Fecha de primer pago"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+msgid "Fecha límite de pago:"
+msgstr "Fecha límite de pago:"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.pagare_amortization
 #: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Fecha:"
-msgstr ""
+msgstr "Fecha:"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_conciliation__final_balance
@@ -1367,6 +1455,16 @@ msgstr "Financiero"
 #: model_terms:ir.ui.view,arch_db:extenss_request.sale_order_form_extend
 msgid "Financial Conditions"
 msgstr "Condiciones financieras"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
+msgid "Financial Factoring Opening"
+msgstr "Apertura Factoraje Financiero"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
+msgid "Financial Factoring Provision"
+msgstr "Disposición Factoraje Financiero"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_pos__financial_pas_id
@@ -1409,10 +1507,20 @@ msgid "First mortage"
 msgstr "Primera hipoteca"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__fixed
+msgid "Fixed"
+msgstr "Fijo"
+
+#. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__activos_fijos
 #: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
 msgid "Fixed assets"
 msgstr "Activos fijos"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__fixed_rate
+msgid "Fixed rate"
+msgstr "Tasa fija"
 
 #. module: extenss_request
 #: model:ir.model,name:extenss_request.model_extenss_request_fondeador
@@ -1481,6 +1589,7 @@ msgstr "Tipo de vivienda"
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__id
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_ownership__id
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_source_income__id
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref__id
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization__id
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_base__id
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_category_act__id
@@ -1494,7 +1603,7 @@ msgstr "Tipo de vivienda"
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_tipo_gasto__id
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_tipo_ingreso__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__iva
@@ -1537,14 +1646,18 @@ msgid "Income Statement"
 msgstr "Estado de resultados"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__init_date
+msgid "Init date"
+msgstr "Fecha de inicio"
+
+#. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__flag_initial_payment
 msgid "Inital Payment"
 msgstr "Pago inicial"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization__initial_balance
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Initial Balance"
 msgstr "Saldo inicial"
 
@@ -1554,6 +1667,7 @@ msgid "Initial balance"
 msgstr "Saldo inicial"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__total_commission
 #: model_terms:ir.ui.view,arch_db:extenss_request.sale_order_form_extend
 msgid "Initial payment"
 msgstr "Pago inicial"
@@ -1576,10 +1690,10 @@ msgid "Intangible assets"
 msgstr "Activos intangibles"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__interest
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__interes
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization__interest
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Interest"
 msgstr "Interés"
 
@@ -1589,25 +1703,32 @@ msgid "Interest Rate"
 msgstr "Tasa de interés"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__interest_vat
+msgid "Interest VAT"
+msgstr "IVA de intereses"
+
+#. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__inventario
 msgid "Inventory"
 msgstr "Inventario"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__invoice_date
+msgid "Invoice date"
+msgstr "Fecha de la factura"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Iva Capital"
 msgstr "IVA Capital"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Iva Interest"
 msgstr "IVA Interés"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Iva Rent"
 msgstr "IVA de renta"
 
@@ -1697,6 +1818,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit____last_update
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_ownership____last_update
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_source_income____last_update
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref____last_update
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization____last_update
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_base____last_update
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_category_act____last_update
@@ -1719,6 +1841,7 @@ msgstr "Última modificación en"
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__write_uid
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_ownership__write_uid
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_source_income__write_uid
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref__write_uid
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization__write_uid
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_base__write_uid
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_category_act__write_uid
@@ -1741,6 +1864,7 @@ msgstr "Última actualización por"
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__write_date
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_ownership__write_date
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_source_income__write_date
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref__write_date
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization__write_date
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_base__write_date
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_category_act__write_date
@@ -1784,11 +1908,10 @@ msgstr "Fecha límite"
 #. module: extenss_request
 #: model:ir.model.fields,help:extenss_request.field_crm_lead__partner_id
 msgid ""
-"Linked partner (optional). Usually created when converting the lead. You can"
-" find a partner by its Name, TIN, Email or Internal Reference."
+"Linked partner (optional). Usually created when converting the lead. You can find a partner by its Name, TIN, Email or Internal Reference."
 msgstr ""
-"Empresa ligada (opcional). Usualmente creada al convertir la iniciativa. "
-"Puedes encontrar la empresa por su Nombre, RFC, Email o Referencia Interna."
+"Empresa ligada (opcional). Usualmente creada al convertir la iniciativa. Puedes encontrar la empresa por su Nombre, RFC, Email o "
+"Referencia Interna."
 
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
@@ -1801,14 +1924,12 @@ msgid "Long-term debt"
 msgstr "Deuda a largo plazo"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "MONTO DEL CRÉDITO"
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "MONTO TOTAL A PAGAR"
 msgstr ""
 
@@ -1830,22 +1951,22 @@ msgstr "Valor de mercado"
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__max_age
 msgid "Max. Age"
-msgstr "Edad max."
+msgstr "Edad max"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__max_amount
 msgid "Max. Amount"
-msgstr "Monto max."
+msgstr "Monto max"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__min_age
 msgid "Min. Age"
-msgstr "Edad min."
+msgstr "Edad min"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__min_amount
 msgid "Min. Amount"
-msgstr "Monto min."
+msgstr "Monto min"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
@@ -1854,8 +1975,7 @@ msgid "Missing the quote signature %s"
 msgstr "Falta la firma de la cotización %s"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Monthly Rent"
 msgstr "Renta mensual"
 
@@ -1882,6 +2002,7 @@ msgstr "Renta mensual"
 
 #. module: extenss_request
 #: model:ir.model.fields.selection,name:extenss_request.selection__extenss_request_commision__type_commision__1
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
 msgid "Monto"
 msgstr "Monto"
 
@@ -1930,8 +2051,6 @@ msgstr "Ventas netas"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
-#: code:addons/extenss_request/models/crm_lead.py:0
-#: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
 msgid "New"
 msgstr "Nuevo"
@@ -1942,8 +2061,7 @@ msgid "New Quotation"
 msgstr "Nuevo Presupuesto"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "No se generará o cobrará comisión alguna."
 msgstr ""
 
@@ -1958,8 +2076,7 @@ msgid "No. Cliente:"
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "No. Cliente: ___________"
 msgstr ""
 
@@ -1972,16 +2089,19 @@ msgid ""
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "No. Payment"
 msgstr "No. de pago"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Nombre"
+msgstr "Nombre"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Nombre comercial del Producto:"
-msgstr ""
+msgstr "Nombre comercial del Producto:"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__number_pay_rest
@@ -2004,10 +2124,9 @@ msgid "Order Reference"
 msgstr "Referencia del pedido"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Ordinaria:"
-msgstr ""
+msgstr "Ordinaria:"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__other
@@ -2080,11 +2199,10 @@ msgstr "Puntos de la tasa de interes base"
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.pagare_amortization
 msgid "PAGARÉ"
-msgstr ""
+msgstr "PAGARÉ"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid ""
 "PLAZO DEL CRÉDITO:\n"
 "                            <br/>"
@@ -2099,9 +2217,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:extenss_request.pagare_amortization
 msgid ""
 "Para toda controversia o litigio de cualquier tipo en relación con el presente pagaré, el Deudor está de acuerdo en someterse\n"
-"                expresamente a la jurisdicción y competencia de los Tribunales competentes del domicilio del Acreedor, siendo este el ubicado\n"
+"                expresamente a la jurisdicción y competencia de los Tribunales competentes del domicilio del Acreedor, siendo este el "
+"ubicado\n"
 "                en Av. José María Morelos y Pavón número 707, Interior 18, Colonia la Merced, Toluca de Lerdo, Estado de México, Código\n"
-"                Postal 50080; por lo tanto, el Deudor renuncia al fuero territorial que por cualquier causa pudiere corresponderle, ya sea en\n"
+"                Postal 50080; por lo tanto, el Deudor renuncia al fuero territorial que por cualquier causa pudiere corresponderle, ya "
+"sea en\n"
 "                lo presente o en lo futuro."
 msgstr ""
 
@@ -2112,8 +2232,7 @@ msgstr "Pasivos"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization__payment
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Payment"
 msgstr "Pagos"
 
@@ -2126,6 +2245,11 @@ msgstr "Monto del pago"
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__payment_capacity
 msgid "Payment capacity"
 msgstr "Capacidad de pago"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__payment_method
+msgid "Payment method"
+msgstr "Método de pago"
 
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
@@ -2155,15 +2279,29 @@ msgid "Person"
 msgstr "Persona"
 
 #. module: extenss_request
-#: model:ir.model.fields,field_description:extenss_request.field_extenss_customer_personal_ref__personal_ref_id
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref__personal_ref_id
 msgid "Personal Ref"
-msgstr "Ref personal"
+msgstr ""
 
 #. module: extenss_request
-#: model:ir.model,name:extenss_request.model_extenss_customer_personal_ref
-#: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
+#: model:ir.model,name:extenss_request.model_extenss_crm_personal_ref model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
 msgid "Personal references"
 msgstr "Referencias personales"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref__phone_personal_ref
+msgid "Phone"
+msgstr "Teléfono"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Phone:"
+msgstr "Teléfono:"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Plazo"
+msgstr "Plazo"
 
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
@@ -2178,6 +2316,12 @@ msgid "Please download the documents to continue"
 msgstr "Descargue los documentos para continuar"
 
 #. module: extenss_request
+#: code:addons/extenss_request/models/crm_lead.py:0
+#, python-format
+msgid "Please enter valid email address in tab Personal references"
+msgstr "Ingrese una dirección de correo electrónico válida en la pestaña Referencias personales"
+
+#. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.pagare_amortization
 msgid "Por el presente pagaré, __________________"
 msgstr ""
@@ -2185,7 +2329,7 @@ msgstr ""
 #. module: extenss_request
 #: model:ir.model.fields.selection,name:extenss_request.selection__extenss_request_commision__type_commision__0
 msgid "Porcentaje"
-msgstr "Porcentaje"
+msgstr ""
 
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
@@ -2205,7 +2349,7 @@ msgstr "Imprimir Pagare"
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_conciliation_lines__processing_id
 msgid "Processing id"
-msgstr "Procesamiento id"
+msgstr ""
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__catlg_product
@@ -2218,6 +2362,11 @@ msgstr "Producto"
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__product_id
 msgid "Product Name"
 msgstr "Nombre del producto"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Producto"
+msgstr "Producto"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__utilidad_ejercicio
@@ -2245,13 +2394,17 @@ msgid "Purchase Option Value"
 msgstr "Valor de opción de compra"
 
 #. module: extenss_request
-#: model:mail.template,report_name:extenss_request.extenss_request_email_template
-msgid "Quotation${object.name}${object.state == 'draft' and '_draft' or ''}"
-msgstr ""
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__purpose
+msgid "Purpose"
+msgstr "Propósito"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.pagare_amortization
+#: model:mail.template,report_name:extenss_request.extenss_request_email_template
+msgid "Quotation${object.name}${object.state == 'draft' and '_draft' or ''}"
+msgstr "Cotización${object.name}${object.state == ‘draft’ and ‘_draft’ or ‘’}"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.pagare_amortization
 #: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "REGISTRO RECA CONDUSEF: 8578-439-030361/01-04698-0818"
 msgstr ""
@@ -2281,13 +2434,22 @@ msgid "Reference"
 msgstr "Referencia"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref__reference_name_personal_ref
+msgid "Reference name"
+msgstr "Nombre de referencia"
+
+#. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__ref_number
 msgid "Reference number"
 msgstr "Número de referencia"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Reference:"
+msgstr "Referencia:"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid ""
 "Registro Contrato de Adhesión Num: 8578-439-030361/01-04698-0818\n"
 "                            <br/>\n"
@@ -2328,12 +2490,20 @@ msgid "Rents in Deposit"
 msgstr "Rentas en depósito"
 
 #. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_my_ext_requests
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_my_home_ext_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_my_home_menu_ext_request
+msgid "Request"
+msgstr "Solicitud"
+
+#. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__amount
 msgid "Request Amount"
 msgstr "Cantidad de la solicitud"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__name
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_my_ext_requests
 msgid "Request number"
 msgstr "Número de solicitud"
 
@@ -2341,6 +2511,11 @@ msgstr "Número de solicitud"
 #: model:ir.model.fields,field_description:extenss_request.field_crm_lead__send_crm
 msgid "Request send"
 msgstr "Enviar solicitud"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Request:"
+msgstr "Solicitud:"
 
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
@@ -2355,7 +2530,7 @@ msgstr "Perfil de residencia"
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__residual_porcentage
 msgid "Residual %"
-msgstr "% Residual\n"
+msgstr "% Residual"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__residual_value
@@ -2368,15 +2543,13 @@ msgid "Risk insurance"
 msgstr "Seguro de riesgo"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.pagare_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.pagare_amortization
 #: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "SCR"
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "SEGUROS"
 msgstr ""
 
@@ -2414,8 +2587,7 @@ msgid "Salesperson"
 msgstr "Comercial"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Seguro: No aplica (opcional u obligatorio)"
 msgstr ""
 
@@ -2423,6 +2595,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
 msgid "Send"
 msgstr "Enviar"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_sale_order__send_email
+msgid "Send email"
+msgstr "Enviar correo electrónico"
 
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.crm_lead_form_extend
@@ -2448,6 +2625,7 @@ msgstr "Fuente de ingreso"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__date_start
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_my_ext_requests
 msgid "Start Date"
 msgstr "Fecha de inicio"
 
@@ -2478,10 +2656,14 @@ msgid "Surce"
 msgstr "Fuente"
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "TASA DE INTERÉS ANUAL"
-msgstr ""
+msgstr "TASA DE INTERÉS ANUAL"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Tasa Interes"
+msgstr "Tasa Interes"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__tax_amount
@@ -2489,6 +2671,7 @@ msgid "Tax Amount"
 msgstr "Importe impuesto"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__tax_rate
 #: model:ir.model.fields,field_description:extenss_request.field_sale_order__tax_id
 msgid "Tax Rate"
 msgstr "Tasa de impuesto"
@@ -2517,9 +2700,7 @@ msgstr "La residencia de los años debe ser de 3 dígitos"
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
-msgid ""
-"The amount of the selected product exceeds the limits, please select another"
-" product"
+msgid "The amount of the selected product exceeds the limits, please select another product"
 msgstr "La cantidad del producto seleccionado supera los límites, seleccione otro producto"
 
 #. module: extenss_request
@@ -2531,8 +2712,25 @@ msgstr "Las cantidades son diferentes"
 #. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
+msgid "The cell phone must be a 10 digits in tab Personal references"
+msgstr "El celular debe tener 10 dígitos en la pestaña Referencias personales"
+
+#. module: extenss_request
+#: code:addons/extenss_request/models/crm_lead.py:0
+#, python-format
+msgid "The phone must be a 10 digits in tab Personal references"
+msgstr "El teléfono debe tener 10 dígitos en la pestaña Referencias personales"
+
+#. module: extenss_request
+#: code:addons/extenss_request/models/crm_lead.py:0
+#, python-format
 msgid "The principal phone must be a 10 digits"
 msgstr "El teléfono principal debe tener 10 dígitos"
+
+#. module: extenss_request
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_ext_request_page
+msgid "Tipo Credito"
+msgstr "Tipo Crédito"
 
 #. module: extenss_request
 #: model:ir.model,name:extenss_request.model_extenss_request_tipo_gasto
@@ -2589,8 +2787,7 @@ msgstr "Compra total"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_request_amortization__total_rent
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid "Total Rent"
 msgstr "Renta total"
 
@@ -2598,6 +2795,11 @@ msgstr "Renta total"
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__activos_totales
 msgid "Total assets"
 msgstr "Activos totales"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__total_available
+msgid "Total available"
+msgstr "Total disponible"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__pasivo_total_circulante
@@ -2635,6 +2837,11 @@ msgid "Total other assets"
 msgstr "Total de otros activos"
 
 #. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__total_payment
+msgid "Total payment"
+msgstr "Pago total"
+
+#. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_source_income__total_gastos
 msgid "Total spends"
 msgstr "Gastos totales"
@@ -2648,6 +2855,11 @@ msgstr "Equidad del total de accionistas"
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__total_activo_circulante
 msgid "Total surrounding assets"
 msgstr "Total de activos circundantes"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__total_willing
+msgid "Total willing"
+msgstr "Total dispuesto"
 
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.view_form_extenss_crm_concilation
@@ -2667,7 +2879,7 @@ msgstr "Tipo de comisión"
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_conciliation_lines__type_rec
 msgid "Type Rec"
-msgstr "Tipo Rec"
+msgstr ""
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_sit__pasivo_tipo
@@ -2685,7 +2897,11 @@ msgid "Type of mortgage"
 msgstr "Tipo de hipoteca"
 
 #. module: extenss_request
-#: code:addons/extenss_request/models/crm_lead.py:0
+#: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_personal_ref__type_reference_personal_ref
+msgid "Type reference"
+msgstr "Tipo de referencia"
+
+#. module: extenss_request
 #: code:addons/extenss_request/models/crm_lead.py:0
 #, python-format
 msgid "Unsigned document %s"
@@ -2697,7 +2913,7 @@ msgid "Used to order stages. Lower is better."
 msgstr "Utilizado para ordenar etapas. Bajo es más prioritario."
 
 #. module: extenss_request
-#: model:res.groups,name:extenss_request.extenss_request_group_user
+#: model_terms:ir.ui.view,arch_db:extenss_request.portal_my_ext_requests model:res.groups,name:extenss_request.extenss_request_group_user
 msgid "User"
 msgstr "Usuario"
 
@@ -2726,6 +2942,11 @@ msgstr "Validado"
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_pos__value_pas
 msgid "Value"
 msgstr "Valor"
+
+#. module: extenss_request
+#: model:ir.model.fields,field_description:extenss_request.field_crm_lead__variance
+msgid "Variance"
+msgstr "Varianza"
 
 #. module: extenss_request
 #: model:ir.model.fields,field_description:extenss_request.field_extenss_crm_lead_financial_pos__verify_act
@@ -2817,8 +3038,7 @@ msgid "_______, comenzando en el mes de __"
 msgstr ""
 
 #. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid ""
 "_________\n"
 "                            <br/>\n"
@@ -2949,16 +3169,6 @@ msgid ""
 "                                TBY dará por terminado el Contrato el día hábil <br/>\n"
 "                                siguiente a aquél en que sea acreditada la identidad del<br/>"
 msgstr ""
-
-#. module: extenss_request
-#: model:ir.model.fields,field_description:extenss_request.field_sale_order__calculate
-msgid "calculate"
-msgstr "Calcular"
-
-#. module: extenss_request
-#: model:ir.model.fields,field_description:extenss_request.field_sale_order__confirm
-msgid "confirm"
-msgstr "Confirmar"
 
 #. module: extenss_request
 #: model_terms:ir.ui.view,arch_db:extenss_request.contrato_amortization
@@ -3528,13 +3738,7 @@ msgid ""
 msgstr ""
 
 #. module: extenss_request
-#: model:ir.model.fields,field_description:extenss_request.field_sale_order__send_email
-msgid "send email"
-msgstr "Enviar correo electrónico"
-
-#. module: extenss_request
-#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop
-#: model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
+#: model_terms:ir.ui.view,arch_db:extenss_request.invoice_cop model_terms:ir.ui.view,arch_db:extenss_request.report_amortization
 msgid ""
 "“Incumplir tus obligaciones te puede generar comisiones”.\n"
 "                            <br/>\n"

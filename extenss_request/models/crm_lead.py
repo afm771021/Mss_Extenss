@@ -115,9 +115,33 @@ class Lead(models.Model):
     def _copy_data(self):
         self.ref_number = self.name + '-S'
 
-    # @api.constrains('catlg_product')
-    # def _copy_data_products(self):
-    #     self.tax_rate = self.catlg_product.taxes_id
+    @api.constrains('amount_ff')
+    def _validate_amount_ff(self):
+        montopapa = 0
+        montosolicitud = 0
+        if self.lineff_id:
+            montopapa = self.lineff_id.amount_ff
+            montosolicitud = self.amount_ff
+            if montosolicitud > montopapa:
+                raise UserError('The amount is greater than the amount of the opening request')
+
+    @api.constrains('init_date')
+    def _validate_init_date(self):
+        if self.lineff_id:
+            if self.init_date and self.invoice_date:
+                if self.init_date <= self.lineff_id.init_date:
+                    raise UserError('The start date must be within the range of the application start date and invoice date')
+                if self.invoice_date >= self.lineff_id.invoice_date:
+                    raise UserError('The invoice date must be less than the invoice date of the request')  
+
+    @api.constrains('invoice_date')
+    def _validate_invoice_date(self):
+        if self.lineff_id:
+            if self.init_date and self.invoice_date:
+                if self.init_date <= self.lineff_id.init_date:
+                    raise UserError('The start date must be within the range of the application start date and invoice date')
+                if self.invoice_date >= self.lineff_id.invoice_date:
+                    raise UserError('The invoice date must be less than the invoice date of the request')
 
     def open_docs_count(self):
         domain = ['|', ('lead_id', '=', [self.id]), ('partner_id', '=', self.partner_id.id)]
@@ -602,6 +626,8 @@ class Lead(models.Model):
             'office_id': self.team_id.id,
             'bill_id': id_cuenta,
             'amount_financed': self.amount_financed,
+            'type_credit': self.catlg_product.credit_type.id,
+            'rate_type': 'Fixed',
             'customer_type': self.partner_type,
             'ff': True,
             'dispersion_date': datetime.now().date(),
@@ -631,7 +657,7 @@ class Lead(models.Model):
             'payment': self.amount_financed + self.interest + self.interest_vat,
             'penalty_amount': 0
         })
-        self.btn_active = False
+        #self.btn_active = False
 
     destination_id = fields.Many2one('extenss.request.destination', string='Destination loan', tracking=True, translate=True)
     name = fields.Char(string='Request number', required=True, copy=False, readonly=True, index=True, tracking=True, translate=True, default=lambda self: _('New'))
@@ -708,7 +734,7 @@ class Lead(models.Model):
 
     amount_delivered = fields.Monetary(string='Amount delivered', currency_field='company_currency', compute='_compute_amount_delivered', store=True, tracking=True, translate=True)
     total_available = fields.Monetary(string='Total available', currency_field='company_currency', tracking=True, translate=True)
-    total_willing = fields.Monetary(string='total willing', currency_field='company_currency', tracking=True, translate=True )
+    total_willing = fields.Monetary(string='Total willing', currency_field='company_currency', tracking=True, translate=True )
 
     interest = fields.Monetary(string='Interest', currency_field='company_currency', compute='_compute_interest', store=True, tracking=True, translate=True)
     interest_vat = fields.Monetary(string='Interest VAT', currency_field='company_currency', compute='_compute_interest_vat', store=True, tracking=True, translate=True)

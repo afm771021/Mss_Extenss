@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <odoo>
-    <record id="view_tree_extenss_ff_pre_notice" model="ir.ui.view">
-        <field name="name">extenss.ff.pre.notice.tree</field>
+    <record id="view_tree_extenss_ff_condonation" model="ir.ui.view">
+        <field name="name">extenss.ff.condonacion.tree</field>
         <field name="model">extenss.credit</field>
         <field name="arch" type="xml">
             <tree>
@@ -22,8 +22,8 @@
         </field>
     </record>
 
-    <record id="view_form_extenss_ff_pre_notice" model="ir.ui.view">
-        <field name="name">extenss.ff.pre.notice.form</field>
+    <record id="view_form_extenss_ff_condonation" model="ir.ui.view">
+        <field name="name">extenss.ff.condonacion.form</field>
         <field name="model">extenss.credit</field>
         <field name="arch" type="xml">
             <form>
@@ -92,33 +92,28 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Amortization" name="amotization">
-                            <field name="amortization_ids" options="{'no_open': True}" readonly="1" force_save="1">
-                                <tree>
-                                    <field name="no_pay"/>
-                                    <field name="expiration_date"/>
-                                    <field name="initial_balance"/>
-                                    <field name="capital"/>
-                                    <field name="interest"/>
-                                    <field name="iva_interest" attrs="{ 'column_invisible' : [('parent.ap', '=', True)]}"/>
-                                    <field name="payment"/>
-                                    <field name="iva_capital" attrs="{ 'column_invisible' : [('parent.af', '=', False)]}"/>
-                                    <field name="iva_rent" attrs="{ 'column_invisible' : [('parent.ap', '=', False)]}"/>
-                                    <field name="total_rent" attrs="{ 'column_invisible' : [('parent.ff', '=', True)]}"/>
-                                    <field name="penalty_amount"/>
-                                </tree>
-                            </field>
-                        </page>
-                        <page string="Expiry notices" name="expiry_notices">
-                            <field name="credit_expiry_ids">
-                                <tree>
-                                    <field name="expiry_number"/>
-                                    <field name="payment_number"/>
-                                    <field name="due_not_date"/>
-                                    <field name="total_paid_moras"/>
-                                    <field name="amount_not"/>
-                                    <field name="total_paid_not"/>
-                                    <field name="total_to_pay"/>
+                        <page string="Condonation" name="condonation">
+                            <form>
+                                <header>
+                                    <button name="action_condonation" string="Condonation" type="object" class="oe_highlight"/>
+                                </header>
+                            </form>
+                            <field name="credit_condonation_ids" >
+                                <tree editable="bottom">
+                                    <field name="expiry_number" readonly="1"/>
+                                    <field name="payment_number" readonly="1"/>
+                                    <field name="due_not_date" readonly="1"/>
+                                    <field name="total_to_pay" invisible="1"/>
+                                    <field name="start_date_mora" readonly="1"/>
+                                    <field name="date_payment" readonly="1"/>
+                                    <field name="outstanding_balance" readonly="1"/>
+                                    <field name="rate_moratorium" readonly="1"/>
+                                    <field name="days_mora" readonly="1"/>
+                                    <field name="interest_moratoriums" readonly="1"/>
+                                    <field name="vat_interest_mora" readonly="1"/>
+                                    <field name="total_interest_mora" readonly="1"/>
+                                    <field name="balance_interest_mora" readonly="1"/>
+                                    <field name="amount_condonation" attrs="{'readonly' : [('total_to_pay', '=', 0)]}"/>
                                 </tree>
                                 <form>
                                     <sheet>
@@ -130,7 +125,6 @@
                                                 <field name="payment_date"/>
                                             </group>
                                             <group>
-                                                <field name="total_paid_moras"/>
                                                 <field name="amount_not"/>
                                                 <field name="total_paid_not"/>
                                                 <field name="total_to_pay"/>
@@ -194,8 +188,8 @@
         </field>
     </record>
 
-    <record id="view_tree_extenss_ff_pre_notice_search" model="ir.ui.view">
-        <field name="name">extenss.ff.pre.notice.search</field>
+    <record id="view_tree_extenss_ff_condonation_search" model="ir.ui.view">
+        <field name="name">extenss.ff.condonacion.search</field>
         <field name="model">extenss.credit</field>
         <field name="arch" type="xml">
             <search>
@@ -212,30 +206,27 @@
                 <field name="type_credit"/>
                 <field name="frequency"/>
                 <field name="interest_rate"/>
-                <filter string="15 days" name="days_15" domain="['&amp;', ('amortization_ids.expiration_date', '&gt;=', (context_today() + datetime.timedelta(days=15)).strftime('%Y-%m-%d')), ('amortization_ids.expiration_date', '&lt;', (context_today() + datetime.timedelta(days=15)).strftime('%Y-%m-%d'))]"/>
-                <filter string="30 Days" name="days_30" domain="['&amp;', ('amortization_ids.expiration_date', '&gt;=', (context_today() + datetime.timedelta(days=30)).strftime('%Y-%m-%d')), ('amortization_ids.expiration_date', '&lt;', (context_today() + datetime.timedelta(days=30)).strftime('%Y-%m-%d'))]"/>
-                <filter string="120 Days" name="days_120" domain="['&amp;', ('amortization_ids.expiration_date', '&gt;=', (context_today() + datetime.timedelta(days=120)).strftime('%Y-%m-%d')), ('amortization_ids.expiration_date', '&lt;', (context_today() + datetime.timedelta(days=120)).strftime('%Y-%m-%d'))]"/>
             </search>
         </field>
     </record>
 
-    <record id="action_pre_notice_ff" model="ir.actions.act_window">
-        <field name="name">Pre Notice</field>
+    <record id="action_condonation_ff" model="ir.actions.act_window">
+        <field name="name">Condonation</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">extenss.credit</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="view_tree_extenss_ff_pre_notice_search"/>
+        <field name="search_view_id" ref="view_tree_extenss_ff_condonation_search"/>
         <field name="domain">[('ff', '=', True)]</field>
         <field name="view_ids"
                 eval="[(5,0,0),
-                (0, 0, {'view_mode': 'tree', 'view_id': ref('extenss_ff.view_tree_extenss_ff_pre_notice')}),
-                (0, 0, {'view_mode': 'form', 'view_id': ref('extenss_ff.view_form_extenss_ff_pre_notice')})]"/>
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('extenss_ff.view_tree_extenss_ff_condonation')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('extenss_ff.view_form_extenss_ff_condonation')})]"/>
     </record>
 
     <menuitem 
-        id="submenu_pre_notice_ff"
-        name="Pre-notice"
-        sequence="40"
+        id="submenu_condonation_ff"
+        name="Condonation"
+        sequence="70"
         parent="menu_ff"
-        action="action_pre_notice_ff"/>
+        action="action_condonation_ff"/>
 </odoo>
