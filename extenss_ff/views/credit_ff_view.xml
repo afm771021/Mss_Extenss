@@ -27,17 +27,7 @@
         <field name="model">extenss.credit</field>
         <field name="arch" type="xml">
             <form>
-                <!-- <header>
-                    <button name="action_new_request" string="Request" type="object" class="oe_highlight"/>
-                    <button name="copy_amortization_table" string="Restructure" type="object" class="oe_highlight"/>
-                </header> -->
                 <sheet>
-                    <!-- <div name="button_box" class="oe_button_box">
-                        <button class="oe_stat_button" type="object" name="open_request_count" icon="fa-bars">
-                            <field name="request_count" string="Request" widget="statinfo"/>
-                        </button>
-                    </div> -->
-
                     <group>
                         <div class="oe_title">
                             <div class="oe_edit_only">
@@ -62,11 +52,11 @@
                             <field name="amount_financed" readonly="1"/>
                             <!-- <field name="term" readonly="1"/>
                             <field name="frequency" readonly="1" options="{'no_open': True}"/> -->
-                            <label for="vat_factor"/>
+                            <!-- <label for="vat_factor"/>
                             <div id="vat_factor" >
                                 <field name="vat_factor" readonly="1" widget="float" class="oe_inline"/>
                                 <span class="oe_grey"> %%</span>
-                            </div>
+                            </div> -->
                             <field name="rate_type" readonly="1"/>
                             <!-- <field name="base_rate_type" readonly="1"/> -->
                             <!-- <label for="base_rate_value"/>
@@ -92,19 +82,19 @@
                             <field name="first_payment_date" readonly="1"/>
                             <field name="dispersion_date" readonly="1"/>
                             <field name="last_payment_date" readonly="1"/>
-                            <label for="purchase_option" readonly="1" attrs="{ 'invisible' : [('ff', '=', True)]}"/>
+                            <!-- <label for="purchase_option" readonly="1" attrs="{ 'invisible' : [('ff', '=', True)]}"/>
                             <div id="purchase_option" readonly="1" attrs="{ 'invisible' : [('ff', '=', True)]}">
                                 <field name="purchase_option" readonly="1" widget="float" class="oe_inline" />
                                 <span class="oe_grey"> %%</span>
-                            </div>
-                            <field name="purchase_option_amount" readonly="1" attrs="{ 'invisible' : [('ff', '=', True)]}"/>
+                            </div> -->
+                            <!-- <field name="purchase_option_amount" readonly="1" attrs="{ 'invisible' : [('ff', '=', True)]}"/> -->
                             <field name="total_paid" readonly="1"/>
-                            <label for="residual_value" readonly="1" attrs="{ 'invisible' : [('ap', '=', False)]}"/>
+                            <!-- <label for="residual_value" readonly="1" attrs="{ 'invisible' : [('ap', '=', False)]}"/>
                             <div id="residual_value" readonly="1" attrs="{ 'invisible' : [('ap', '=', False)]}">
                                 <field name="residual_value" readonly="1" widget="float" class="oe_inline"/>
                                 <span class="oe_grey"> %%</span>
                             </div>
-                            <field name="amount_residual_value" readonly="1" attrs="{ 'invisible' : [('ap', '=', False)]}"/>
+                            <field name="amount_residual_value" readonly="1" attrs="{ 'invisible' : [('ap', '=', False)]}"/> -->
                             <br/>
                             <field name="salesperson_id" readonly="1" options="{'no_open': True}"/>
                             <field name="office_id" readonly="1" options="{'no_open': True}"/>
@@ -128,10 +118,10 @@
                             <field name="guarantee_deposit" readonly="1" attrs="{ 'invisible' : [('af', '=', False)]}"/>
                             <field name="vat_guarantee_deposit" readonly="1" attrs="{ 'invisible' : [('af', '=', False)]}"/>
                             <field name="total_guarantee_deposit" readonly="1" attrs="{ 'invisible' : [('af', '=', False)]}"/> -->
-                            <label for="percentage_commission" />
+                            <label for="percentage_commission"/>
                             <div id="percentage_commission">
                                 <field name="percentage_commission" readonly="1" widget="float" class="oe_inline"/>
-                                <span class="oe_grey"> %%</span>
+                                <span class="oe_grey">%%</span>
                             </div>
                             <field name="commission_amount" readonly="1"/>
                             <field name="commission_vat" readonly="1"/>
@@ -141,7 +131,7 @@
                             <field name="total_ratification" readonly="1" attrs="{ 'invisible' : [('ff', '=', True)]}"/>
                             <field name="initial_total_payment" readonly="1" attrs="{ 'invisible' : [('ff', '=', True)]}"/> -->
                             <br/>
-                            <!-- <field name="flag_early_settlement"/> -->
+                            <field name="flag_early_settlement"/>
                             <field name="notice_date"/>
                             <field name="payment_date"/>
                             <field name="cs" invisible="1"/><field name="af" invisible="1"/><field name="ap" invisible="1"/>
@@ -469,7 +459,6 @@
                 <field name="type_credit"/>
                 <field name="frequency"/>
                 <field name="interest_rate"/>
-                <field name="term"/>
             </search>
         </field>
     </record>
