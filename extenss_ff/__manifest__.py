@@ -20,7 +20,9 @@
         'views/credit_ff_adv_pay_view.xml',
         'views/credit_ff_moras_view.xml',
         'views/credit_ff_exp_notice_view.xml',
-        # 'views/credit_dn_payment_balance_view.xml',
         'views/credit_ff_condonation_view.xml',
+        'views/credit_ff_acct_portfolio_view.xml',
+        'views/credit_ff_dispositions_view.xml',
+        'views/credit_ff_statement_account_view.xml',
         ],
 }

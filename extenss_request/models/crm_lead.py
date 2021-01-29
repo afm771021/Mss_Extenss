@@ -129,18 +129,18 @@ class Lead(models.Model):
     def _validate_init_date(self):
         if self.lineff_id:
             if self.init_date and self.invoice_date:
-                if self.init_date <= self.lineff_id.init_date:
+                if self.init_date < self.lineff_id.init_date:
                     raise UserError('The start date must be within the range of the application start date and invoice date')
-                if self.invoice_date >= self.lineff_id.invoice_date:
-                    raise UserError('The invoice date must be less than the invoice date of the request')  
+                if self.invoice_date > self.lineff_id.invoice_date:
+                    raise UserError('The invoice date must be less than the invoice date of the request')
 
     @api.constrains('invoice_date')
     def _validate_invoice_date(self):
         if self.lineff_id:
             if self.init_date and self.invoice_date:
-                if self.init_date <= self.lineff_id.init_date:
+                if self.init_date < self.lineff_id.init_date:
                     raise UserError('The start date must be within the range of the application start date and invoice date')
-                if self.invoice_date >= self.lineff_id.invoice_date:
+                if self.invoice_date > self.lineff_id.invoice_date:
                     raise UserError('The invoice date must be less than the invoice date of the request')
 
     def open_docs_count(self):
@@ -750,7 +750,38 @@ class Lead(models.Model):
     @api.depends('catlg_product')
     def _compute_catlg_product(self):
         for reg in self:
-            reg.tax_rate = self.catlg_product.taxes_id
+            if reg.catlg_product.credit_type.shortcut == 'LFF' or reg.catlg_product.credit_type.shortcut == 'ff':
+                
+                reg.tax_rate = self.catlg_product.taxes_id
+
+                name = self.env['extenss.product.cat_docs'].search([('doc_id', '=', reg.catlg_product.id)])
+                for reg in name:
+                    namedoc = self.env['extenss.product.type_docs'].search([('id', '=', reg.catalogo_docs.id)])
+                    for regname in namedoc:
+                        self.rel = regname.related_to
+                        self.nombre = regname.name
+                        if self.rel == 'contact':
+                            self.contacto = self.partner_id.id
+                            self.solicitud = ''
+                        if self.rel == 'request':
+                            self.solicitud = self.id
+                            self.contacto = ''
+
+                        existe = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', reg.id), ('doc_prod_id', '=', regname.id)])
+                        #existe_cliente = self.env['documents.document'].search([('partner_id', '=', self.partner_id.id),('doc_prod_id', '=', regname.id)])
+
+                        if not existe.id:#and not existe_cliente
+                            document = self.env['documents.document'].create({
+                                'name': namedoc.name,
+                                'type': 'empty',
+                                'folder_id': 1,
+                                'owner_id': self.env.user.id,
+                                'partner_id': self.contacto if self.contacto else False,#self.partner_id.id if self.partner_id.id else False,
+                                'res_id': 0,
+                                'res_model': 'documents.document',
+                                'lead_id': self.solicitud,#self.opportunity_id.id
+                                'doc_prod_id': regname.id
+                        })
 
     @api.depends('amount_ff')
     def _compute_amount(self):

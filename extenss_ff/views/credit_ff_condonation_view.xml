@@ -226,7 +226,7 @@
     <menuitem 
         id="submenu_condonation_ff"
         name="Condonation"
-        sequence="70"
+        sequence="110"
         parent="menu_ff"
         action="action_condonation_ff"/>
 </odoo>

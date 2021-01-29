@@ -536,6 +536,7 @@ class ExtenssProvisions(models.Model):
 
     lineff_id = fields.Many2one('crm.lead', string='Lineff Id')
     name = fields.Char(string='Name')
+    catlg_product = fields.Many2one('extenss.product.template', string='Product', domain="[('credit_type.shortcut', '=', product_name)]")
 
     def action_create_provision(self):
         self.create({

@@ -229,7 +229,7 @@
     <menuitem 
         id="submenu_moras_ff"
         name="Moras"
-        sequence="50"
+        sequence="80"
         parent="menu_ff"
         action="action_moras_ff"/>
 </odoo>

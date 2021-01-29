@@ -235,7 +235,7 @@
     <menuitem 
         id="submenu_pre_notice_ff"
         name="Pre-notice"
-        sequence="40"
+        sequence="50"
         parent="menu_ff"
         action="action_pre_notice_ff"/>
 </odoo>
