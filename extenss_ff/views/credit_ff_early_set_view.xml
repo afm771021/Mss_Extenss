@@ -265,7 +265,7 @@
     <menuitem 
         id="submenu_early_set_ff"
         name="Early Settlement"
-        sequence="80"
+        sequence="70"
         parent="menu_ff"
         action="action_early_set_ff"/>
 </odoo>

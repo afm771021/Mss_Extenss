@@ -105,7 +105,7 @@
     <menuitem 
         id="submenu_initial_pay_ff"
         name="Initial Pay"
-        sequence="30"
+        sequence="20"
         parent="menu_ff"
         action="action_initial_pay_ff"/>
 </odoo>

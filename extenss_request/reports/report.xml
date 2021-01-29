@@ -29,4 +29,23 @@
             file="extenss_request.pagare_amortization"
             print_report_name="'Pagare %s' % (object.name)"
             />
+
+        <report
+            id="contrato_extenss_request"
+            string="Contrato"
+            model="crm.lead"
+            report_type="qweb-pdf"
+            name="extenss_request.contrato_ff"
+            file="extenss_request.contrato_ff"
+            print_report_name="'Contrato %s' % (object.name)"
+            />
+        <report
+            id="pagare_extenss_request"
+            string="Pagare"
+            model="crm.lead"
+            report_type="qweb-pdf"
+            name="extenss_request.pagare_ff"
+            file="extenss_request.pagare_ff"
+            print_report_name="'Pagare %s' % (object.name)"
+            />
 </odoo>

@@ -25,5 +25,7 @@
         'reports/report.xml',
         'data/mail_templete.xml',
         'data/quotation_template.xml',
+        'reports/contrato_ff.xml',
+        'reports/pagare_ff.xml',
     ],
 }

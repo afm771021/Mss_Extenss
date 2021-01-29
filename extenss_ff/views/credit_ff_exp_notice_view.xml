@@ -94,7 +94,7 @@
                             <field name="ff" invisible="1"/>
                         </group>
                         <group>
-                            <field name="conciliation_credit_ids" options="{'no_create': True}" domain="[('status', '=', 'pending'),('type_rec', '=', 'dn')]"><!--domain="[('status', '=', 'pending'),('type_rec', '=', 'dn')]"-->
+                            <field name="conciliation_credit_ids" options="{'no_create': True}" domain="[('status', '=', 'pending')]">
                                 <tree editable="bottom">
                                     <field name="check" />
                                     <field name="reference" readonly="1"/>
@@ -243,7 +243,7 @@
     <menuitem 
         id="submenu_exp_notice_ff"
         name="Expiry notice"
-        sequence="90"
+        sequence="100"
         parent="menu_ff"
         action="action_exp_notice_ff"/>
 </odoo>

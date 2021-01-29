@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <odoo>
     <record id="module_extenss_ff_category" model="ir.module.category">
-        <field name="name">Credit DN</field>
+        <field name="name">Credit FF</field>
     </record>
     <!--User Group-->
     <record id="extenss_ff_group_user" model="res.groups">
