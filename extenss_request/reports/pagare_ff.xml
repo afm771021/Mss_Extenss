@@ -18,12 +18,12 @@
                 <div id="parte2" style="font-size: 16px;text-align: justify;" >
                 <p>Por el presente pagaré, __________________<t t-esc="doc.partner_id.name"/>___________________________ (en
                 adelante, el “Deudor”), promete pagar incondicionalmente a la orden de Soluciones Integrales TBY, S.A. DE C.V., SOFOM,
-                E.N.R. (en adelante, el “Acreedor”), el importe de $<t t-esc="doc.amount"/> (___________________________________________
+                E.N.R. (en adelante, el “Acreedor”), el importe de $<t t-esc="doc.amount_delivered"/> (___________________________________________
                 __________________________________________ pesos ___/100 M.N.), en cualquier lugar o domicilio en el que se le 
-                requiera de pago. El importe del presente pagaré será liquidado por el Deudor en forma __<t t-esc="doc.frequency_id.name"/>__, mediante _<t t-esc="doc.term"/>_ 
-                pagos parciales consecutivos e ininterrumpidos, cada uno por el importe de $ __<t t-esc="'{0:,.2f}'.format(round(float((doc.total_payment)), 2))"/>__ (_______________________
+                requiera de pago. El importe del presente pagaré será liquidado por el Deudor en forma __<t t-esc="doc.days"/>__, mediante _<t t-esc="doc.days"/>_ 
+                pagos parciales consecutivos e ininterrumpidos, cada uno por el importe de $ __<t t-esc="'{0:,.2f}'.format(round(float((doc.amount_delivered)), 2))"/>__ (_______________________
                 __________________________________________________ pesos _____/100 M.N.), pagaderos los días ___<t t-esc="doc.create_date.day"/>___
-                ____________________________ de cada ____<t t-esc="doc.term"/>_______, comenzando en el mes de __<t t-esc="doc.create_date.month"/>__del año _<t t-esc="doc.create_date.year"/>_ 
+                ____________________________ de cada ____<t t-esc="doc.days"/>_______, comenzando en el mes de __<t t-esc="doc.create_date.month"/>__del año _<t t-esc="doc.create_date.year"/>_ 
                 y finalizando el mes de ___<t t-esc="doc.create_date.month"/>__del año _<t t-esc="doc.create_date.year"/>_.</p>
                 </div>
                 <br></br>
