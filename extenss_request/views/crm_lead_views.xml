@@ -36,7 +36,7 @@
                 <button name="action_refuse_sale" string="To refuse" type="object" class="btn-primary" attrs="{'invisible': [('stage_id', '!=', 2)]}"/>
             </xpath>
             <xpath expr="//button[@name='action_refuse_sale']" position="after">
-                <button name="download_file_contrato" string="Print Contrato" type="object" class="btn-primary" attrs="{'invisible': ['|','|', ('sequence_stage', 'not in', [3,6]),('btn_active', '=', False)]}"/>
+                <button name="download_file_contrato" string="Print Contrato" type="object" class="btn-primary" attrs="{'invisible': ['|','|','|', ('sequence_stage', 'not in', [3,6]),('btn_active', '=', False),('product_name', '=', 'LFF'),('product_name', '=', 'ff')]}"/>
             </xpath>
             <xpath expr="//button[@name='action_refuse_sale']" position="after">
                 <button name="download_file_pagare" string="Print Pagare" type="object" class="btn-primary" attrs="{'invisible': ['|','|','|', ('sequence_stage', 'not in', [3,6]),('btn_active', '=', False),('product_name', '=', 'LFF'),('product_name', '=', 'ff')]}"/>

@@ -133,6 +133,10 @@ class Lead(models.Model):
                     raise UserError('The start date must be within the range of the application start date and invoice date')
                 if self.invoice_date > self.lineff_id.invoice_date:
                     raise UserError('The invoice date must be less than the invoice date of the request')
+        else:
+            if self.init_date and self.invoice_date:
+                if self.init_date > self.invoice_date:
+                    raise UserError('The initial date must be less than the invoice date')
 
     @api.constrains('invoice_date')
     def _validate_invoice_date(self):
@@ -142,6 +146,10 @@ class Lead(models.Model):
                     raise UserError('The start date must be within the range of the application start date and invoice date')
                 if self.invoice_date > self.lineff_id.invoice_date:
                     raise UserError('The invoice date must be less than the invoice date of the request')
+        else:
+            if self.init_date and self.invoice_date:
+                if self.init_date > self.invoice_date:
+                    raise UserError('The initial date must be less than the invoice date')
 
     def open_docs_count(self):
         domain = ['|', ('lead_id', '=', [self.id]), ('partner_id', '=', self.partner_id.id)]
@@ -161,7 +169,10 @@ class Lead(models.Model):
         self.document_count = count
 
     def action_send_sale(self):
-        self.validations()
+        if self.product_name == 'LFF' or self.product_name == 'ff':
+            self.validations_ff()
+        else:
+            self.validations()
         self.send_crm = 'Sending'
         self.user_send_req = self.env.user.id
         self.stage_id = 2
@@ -403,7 +414,7 @@ class Lead(models.Model):
             if self.partner_type == 'person':
                 if reg.product_id.endorsement:
                     cont_reg_av = 0
-                    reg_pf = self.env['extenss.customer.personal_ref'].search([('personal_ref_id', '=', self.id)])
+                    reg_pf = self.env['extenss.crm.personal_ref'].search([('personal_ref_id', '=', self.id)])
                     if not reg_pf:
                         raise ValidationError(_('Add an Aval type record in the Personal References tab'))
                     for r in reg_pf:
@@ -425,7 +436,7 @@ class Lead(models.Model):
                         raise ValidationError(_('Enter a record in Source income tab in the section of Expenses for quotation number %s' % reg.name))
                 if reg.product_id.beneficiaries:
                     cont_reg_bf = 0
-                    reg_benef = self.env['extenss.customer.personal_ref'].search([('personal_ref_id', '=', self.id)])
+                    reg_benef = self.env['extenss.crm.personal_ref'].search([('personal_ref_id', '=', self.id)])
                     if not reg_benef:
                         raise ValidationError(_('Add a beneficiary type record in the Personal References tab'))
                     for r in reg_benef:
@@ -447,7 +458,7 @@ class Lead(models.Model):
                         raise ValidationError(_('Enter data in Residence profile tab for quotation number %s' % reg.name))
                 if reg.product_id.obligated_solidary:
                     cont_reg_os = 0
-                    reg_os = self.env['extenss.customer.personal_ref'].search([('personal_ref_id', '=', self.id)])
+                    reg_os = self.env['extenss.crm.personal_ref'].search([('personal_ref_id', '=', self.id)])
                     if not reg_os:
                         raise ValidationError(_('Add a record of type bound by solidarity in the Personal References tab'))
                     for r in reg_os:
@@ -669,80 +680,81 @@ class Lead(models.Model):
             'payment': self.amount_financed + self.interest + self.interest_vat,
             'penalty_amount': 0
         })
-        #self.btn_active = False
+        self.btn_active = False
 
-    # def validations_ff(self):
-    #     if self.partner_type == 'company':
-    #         if reg.product_id.financial_situation:
-    #                 reg_fs = self.env['extenss.crm.lead.financial_sit'].search([('financial_id', '=', self.id)])
-    #                 if not reg_fs:
-    #                     raise ValidationError(_('Enter a record in Financial situation tab'))
-    #                 if reg_fs.activos_totales <= 0.0:
-    #                     raise ValidationError(_('Enter data in the Assets tab in any of the sections'))
-    #                 if reg_fs.pasivo_total_capital_contable <= 0.0:
-    #                     raise ValidationError(_('Enter data in Liabilities tab in any of the sections'))
-    #                 if not reg_fs.beneficios_ope_totales:
-    #                     raise ValidationError(_('Enter data in Income statement tab in any of the sections'))
-    #     if self.partner_type == 'person':
-    #             if reg.product_id.endorsement:
-    #                 cont_reg_av = 0
-    #                 reg_pf = self.env['extenss.customer.personal_ref'].search([('personal_ref_id', '=', self.id)])
-    #                 if not reg_pf:
-    #                     raise ValidationError(_('Add an Aval type record in the Personal References tab'))
-    #                 for r in reg_pf:
-    #                     reg_p = self.env['extenss.customer.type_refbank'].search([('id', '=', r.type_reference_personal_ref.id)])
-    #                     if reg_p.shortcut == 'AV':
-    #                         cont_reg_av += 1
-    #                 if cont_reg_av <= 0:
-    #                     raise ValidationError(_('Enter a Endorsement type record in Personal references tab for quotation number %s' % reg.name))
-    #             if reg.product_id.guarantee:
-    #                 reg_w = self.env['extenss.crm.lead.ownership'].search([('ownership_id', '=', self.id)])
-    #                 if not reg_w:
-    #                     raise ValidationError(_('Enter a record in Ownership tab %s' % reg.name))
-    #             if reg.product_id.socioeconomic_study:
-    #                 reg_source = self.env['extenss.crm.lead.source_income'].search([('surce_id', '=', self.id)])
-    #                 reg_exp = self.env['extenss.crm.lead.source_income'].search([('gasto_id', '=', self.id)])
-    #                 if not reg_source:
-    #                     raise ValidationError(_('Enter a record in Source income tab in the section of Income for quotation number %s' % reg.name))
-    #                 if not reg_exp:
-    #                     raise ValidationError(_('Enter a record in Source income tab in the section of Expenses for quotation number %s' % reg.name))
-    #             if reg.product_id.beneficiaries:
-    #                 cont_reg_bf = 0
-    #                 reg_benef = self.env['extenss.customer.personal_ref'].search([('personal_ref_id', '=', self.id)])
-    #                 if not reg_benef:
-    #                     raise ValidationError(_('Add a beneficiary type record in the Personal References tab'))
-    #                 for r in reg_benef:
-    #                     reg_p = self.env['extenss.customer.type_refbank'].search([('id', '=', r.type_reference_personal_ref.id)])
-    #                     if reg_p.shortcut == 'BF':
-    #                         cont_reg_bf += 1
-    #                 if cont_reg_bf <= 0:
-    #                     raise ValidationError(_('Enter a Beneficiaries type record in Personal references tab for quotation number %s' % reg.name))
-    #             if reg.product_id.financial_situation:
-    #                 reg_pos = self.env['extenss.crm.lead.financial_pos'].search([('financial_pos_id', '=', self.id)])
-    #                 reg_pas = self.env['extenss.crm.lead.financial_pos'].search([('financial_pas_id', '=', self.id)])
-    #                 if not reg_pos:
-    #                     raise ValidationError(_('Enter a record in Financial position tab in the section Assets for quotation number %s' % reg.name))
-    #                 if not reg_pas:
-    #                     raise ValidationError(_('Enter a record in Financial position tab in the section Passives for quotation number %s' % reg.name))
+    def validations_ff(self):
+        if self.partner_type == 'company':
+            if self.catlg_product.financial_situation:
+                reg_fs = self.env['extenss.crm.lead.financial_sit'].search([('financial_id', '=', self.id)])
+                if not reg_fs:
+                    raise ValidationError(_('Enter a record in Financial situation tab'))
+                if reg_fs.activos_totales <= 0.0:
+                    raise ValidationError(_('Enter data in the Assets tab in any of the sections'))
+                if reg_fs.pasivo_total_capital_contable <= 0.0:
+                    raise ValidationError(_('Enter data in Liabilities tab in any of the sections'))
+                if not reg_fs.beneficios_ope_totales:
+                    raise ValidationError(_('Enter data in Income statement tab in any of the sections'))
+        if self.partner_type == 'person':
+            if self.catlg_product.endorsement:
+                cont_reg_av = 0
+                reg_pf = self.env['extenss.crm.personal_ref'].search([('personal_ref_id', '=', self.id)])
+                if not reg_pf:
+                    raise ValidationError(_('Add an Aval type record in the Personal References tab'))
+                for r in reg_pf:
+                    reg_p = self.env['extenss.customer.type_refbank'].search([('id', '=', r.type_reference_personal_ref.id)])
+                    if reg_p.shortcut == 'AV':
+                        cont_reg_av += 1
+                if cont_reg_av <= 0:
+                    raise ValidationError(_('Enter a Endorsement type record in Personal references tab for request number %s' % self.name))
 
-    #             if reg.product_id.patrimonial_relationship:
-    #                 if self.total_resident <= 0.0:
-    #                     raise ValidationError(_('Enter data in Residence profile tab for quotation number %s' % reg.name))
-    #             if reg.product_id.obligated_solidary:
-    #                 cont_reg_os = 0
-    #                 reg_os = self.env['extenss.customer.personal_ref'].search([('personal_ref_id', '=', self.id)])
-    #                 if not reg_os:
-    #                     raise ValidationError(_('Add a record of type bound by solidarity in the Personal References tab'))
-    #                 for r in reg_os:
-    #                     reg_p = self.env['extenss.customer.type_refbank'].search([('id', '=', r.type_reference_personal_ref.id)])
-    #                     if reg_p.shortcut == 'OS':
-    #                         cont_reg_os += 1
-    #                 if cont_reg_os <= 0:
-    #                     raise ValidationError(_('Enter a Solidarity bound type record in Personal references tab for quotation number %s' % reg.name))
+            if self.catlg_product.guarantee:
+                reg_w = self.env['extenss.crm.lead.ownership'].search([('ownership_id', '=', self.id)])
+                if not reg_w:
+                    raise ValidationError(_('Enter a record in Ownership tab %s' % self.name))
 
+            if self.catlg_product.socioeconomic_study:
+                reg_source = self.env['extenss.crm.lead.source_income'].search([('surce_id', '=', self.id)])
+                reg_exp = self.env['extenss.crm.lead.source_income'].search([('gasto_id', '=', self.id)])
+                if not reg_source:
+                    raise ValidationError(_('Enter a record in Source income tab in the section of Income for request number %s' % self.name))
+                if not reg_exp:
+                    raise ValidationError(_('Enter a record in Source income tab in the section of Expenses for request number %s' % self.name))
 
+            if self.catlg_product.beneficiaries:
+                cont_reg_bf = 0
+                reg_benef = self.env['extenss.crm.personal_ref'].search([('personal_ref_id', '=', self.id)])
+                if not reg_benef:
+                    raise ValidationError(_('Add a beneficiary type record in the Personal References tab'))
+                for r in reg_benef:
+                    reg_p = self.env['extenss.customer.type_refbank'].search([('id', '=', r.type_reference_personal_ref.id)])
+                    if reg_p.shortcut == 'BF':
+                        cont_reg_bf += 1
+                if cont_reg_bf <= 0:
+                    raise ValidationError(_('Enter a Beneficiaries type record in Personal references tab for request number %s' % self.name))
 
+            if self.catlg_product.financial_situation:
+                reg_pos = self.env['extenss.crm.lead.financial_pos'].search([('financial_pos_id', '=', self.id)])
+                reg_pas = self.env['extenss.crm.lead.financial_pos'].search([('financial_pas_id', '=', self.id)])
+                if not reg_pos:
+                    raise ValidationError(_('Enter a record in Financial position tab in the section Assets for request number %s' % self.name))
+                if not reg_pas:
+                    raise ValidationError(_('Enter a record in Financial position tab in the section Passives for request number %s' % self.name))
 
+            if self.catlg_product.patrimonial_relationship:
+                if self.total_resident <= 0.0:
+                    raise ValidationError(_('Enter data in Residence profile tab for request number %s' % self.name))
+
+            if self.catlg_product.obligated_solidary:
+                cont_reg_os = 0
+                reg_os = self.env['extenss.crm.personal_ref'].search([('personal_ref_id', '=', self.id)])
+                if not reg_os:
+                    raise ValidationError(_('Add a record of type bound by solidarity in the Personal References tab'))
+                for r in reg_os:
+                    reg_p = self.env['extenss.customer.type_refbank'].search([('id', '=', r.type_reference_personal_ref.id)])
+                    if reg_p.shortcut == 'OS':
+                        cont_reg_os += 1
+                if cont_reg_os <= 0:
+                    raise ValidationError(_('Enter a Solidarity bound type record in Personal references tab for request number %s' % self.name))
 
     destination_id = fields.Many2one('extenss.request.destination', string='Destination loan', tracking=True, translate=True)
     name = fields.Char(string='Request number', required=True, copy=False, readonly=True, index=True, tracking=True, translate=True, default=lambda self: _('New'))
@@ -852,9 +864,9 @@ class Lead(models.Model):
                             self.contacto = ''
 
                         existe = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', reg.id), ('doc_prod_id', '=', regname.id)])
-                        #existe_cliente = self.env['documents.document'].search([('partner_id', '=', self.partner_id.id),('doc_prod_id', '=', regname.id)])
+                        existe_cliente = self.env['documents.document'].search([('partner_id', '=', self.partner_id.id),('doc_prod_id', '=', regname.id)])
 
-                        if not existe.id:#and not existe_cliente
+                        if not existe.id and not existe_cliente:
                             document = self.env['documents.document'].create({
                                 'name': namedoc.name,
                                 'type': 'empty',
