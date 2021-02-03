@@ -541,8 +541,8 @@ class ExtenssProvisions(models.Model):
     def action_create_provision(self):
         self.create({
             'lineff_id': self.id,
-            'catlg_product': '7',
             'product_name': 'ff',
+            'catlg_product': 7,
             'stage_id': self.env['crm.stage'].search([('sequence', '=', '5')]).id,
             'partner_id': self.partner_id.id,
             'capacity': self.capacity,
