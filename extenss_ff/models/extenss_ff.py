@@ -92,11 +92,8 @@ class ExtenssFF(models.Model):
         int_tmp = out_balance * ((itr/100)/base) * days
         vat_int = (vat_credit/100) * int_tmp
 
-        if self.dn:
+        if self.ff:
             sum_total = out_balance + int_tmp + vat_int
-
-        if self.af: 
-            sum_total += vat_capital
 
         st = amount_penalty + past_due_balance + interest_mora_sum + vat_interest_mora + poa + vat_poa - gda - bid
 
@@ -215,10 +212,10 @@ class ExtenssFF(models.Model):
     # amortization_ids = fields.One2many('extenss.credit.amortization', 'credit_id', string='Amortization Table')
     # balance = fields.Monetary(related='bill_id.balance',currency_field='company_currency')
 
-    init_date = fields.Date(string='Init date', tracking=True, translate=True)
-    invoice_date = fields.Date(string='Invoice date', tracking=True, translate=True)
-    capacity = fields.Float('% Capacity', (2,2), tracking=True, translate=True)
-    days = fields.Integer(string='Days', tracking=True, translate=True)
+    # init_date = fields.Date(string='Init date', tracking=True, translate=True)
+    # invoice_date = fields.Date(string='Invoice date', tracking=True, translate=True)
+    # capacity = fields.Float('% Capacity', (2,2), tracking=True, translate=True)
+    # days = fields.Integer(string='Days', tracking=True, translate=True)
     #count_credits = fields.Integer(string='Cont', compute='get_count_credits',  tracking=True)
 
     #Liquidacion Anticipada
@@ -448,7 +445,7 @@ class ExtenssLead(models.Model):
     init_date = fields.Date(string='Init date', tracking=True, translate=True)
     invoice_date = fields.Date(string='Invoice date', tracking=True, translate=True)
     payment_method = fields.Char(string='Payment method', tracking=True, translate=True)
-    capacity = fields.Float('% Capacity', (2,6), tracking=True, translate=True)
+    capacity = fields.Float('% Capacity', (2,2), tracking=True, translate=True)
     amount_financed = fields.Monetary(string='Amount financed', currency_field='company_currency', compute='_compute_amount_financed',store=True, tracking=True, translate=True)
     commission_details = fields.Float('Commission Details', (2,2), tracking=True, translate=True)
     commissions = fields.Monetary(string='Commissions', currency_field='company_currency', compute='_compute_commission', store=True, tracking=True, translate=True)
@@ -473,7 +470,7 @@ class ExtenssLead(models.Model):
     #dn_s = fields.Boolean(related='sale_order_ids.dn')
     #productid = fields.Many2one(related='sale_order_ids.product_id')
     conciliation_lines_ids = fields.Many2many('extenss.credit.conciliation_lines', string='Payment')#,  default=_default_conciliation)
-    #flag_dispersion = fields.Boolean(string='Dispersion', default=False, tracking=True, translate=True)
+    flag_dispersion = fields.Boolean(string='Dispersion', default=False, tracking=True, translate=True)
 
     company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
     company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company.id)

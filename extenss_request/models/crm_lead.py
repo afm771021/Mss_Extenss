@@ -104,7 +104,6 @@ class Lead(models.Model):
     @api.constrains('stage_id')
     def _check_stage_id(self):
         if self.stage_id.id != self.env['crm.stage'].search([('sequence', '=', '1')]).id:
-
             self.validations()
             self.user_send_req = self.env.user.id
             #self.stage_id =  2
@@ -866,7 +865,7 @@ class Lead(models.Model):
                         existe = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', reg.id), ('doc_prod_id', '=', regname.id)])
                         existe_cliente = self.env['documents.document'].search([('partner_id', '=', self.partner_id.id),('doc_prod_id', '=', regname.id)])
 
-                        if not existe.id and not existe_cliente:
+                        if existe.id == False and existe_cliente == False:
                             document = self.env['documents.document'].create({
                                 'name': namedoc.name,
                                 'type': 'empty',
