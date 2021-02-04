@@ -181,6 +181,12 @@ class Credits(models.Model):
     count_moras = fields.Integer(string='Total Moras', compute='_get_moras', store=True)
     total_moras = fields.Monetary(string='Total Amount Moras', compute='_get_amount_moras', store=True, currency_field='company_currency')
 
+    ######
+    sum_capital = fields.Monetary(string='Paid capital ', currency_field='company_currency', compute='_compute_amount_capital', store=True, tracking=True, translate=True)
+    sum_interest = fields.Monetary(string='Paid interest', currency_field='company_currency', compute='_compute_amount_interest', store=True, tracking=True, translate=True)
+    sum_capvat = fields.Monetary(string='Paid VAT capital', currency_field='company_currency', compute='_compute_amount_capvat', store=True, tracking=True, translate=True)
+    sum_intvat = fields.Monetary(string='Paid VAT interest', currency_field='company_currency', compute='_compute_amount_intvat', store=True, tracking=True, translate=True)
+    ########
     company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
     company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company.id)
 
@@ -198,6 +204,28 @@ class Credits(models.Model):
     def _get_amount_moras(self):
         for reg in self:
             reg.total_moras = sum([line.total_paid_moras for line in reg.credit_moras_ids])
+
+    #########
+    @api.depends('credit_expiry_ids','credit_expiry_ids.sum_con_capital')
+    def _compute_amount_capital(self):
+        for reg in self:
+            reg.sum_capital = sum([line.sum_con_capital for line in reg.credit_expiry_ids])
+
+    @api.depends('credit_expiry_ids','credit_expiry_ids.sum_con_interest')
+    def _compute_amount_interest(self):
+        for reg in self:
+            reg.sum_interest = sum([line.sum_con_interest for line in reg.credit_expiry_ids])
+
+    @api.depends('credit_expiry_ids','credit_expiry_ids.sum_con_capvat')
+    def _compute_amount_capvat(self):
+        for reg in self:
+            reg.sum_capvat = sum([line.sum_con_capvat for line in reg.credit_expiry_ids])
+
+    @api.depends('credit_expiry_ids','credit_expiry_ids.sum_con_intvat')
+    def _compute_amount_intvat(self):
+        for reg in self:
+            reg.sum_intvat = sum([line.sum_con_intvat for line in reg.credit_expiry_ids])
+    ###########
 
     @api.model
     def create(self, reg):
@@ -304,7 +332,7 @@ class Credits(models.Model):
 
             if val_regs == 0:
                 for rec in records_amortization:
-                    if reg.cs == False and reg.dn == False:
+                    if reg.cs == False and reg.dn == False and reg.ff == False:
                         amount = rec.total_rent
                     else:
                         amount = rec.payment
@@ -323,7 +351,7 @@ class Credits(models.Model):
 
                     rec_notice = self.env['extenss.credit.expiry_notices'].search([('payment_number', '=', rec.no_pay),('credit_expiry_id', '=', reg.id),('req_credit_id', '=', False)])
                     for r in rec_notice:
-                        if reg.af or reg.cs or reg.dn:
+                        if reg.af or reg.cs or reg.dn or reg.ff:
                             rec_cp.create({
                                 'expiry_notice_id': r.id,
                                 'concept': 'capital',
@@ -339,7 +367,7 @@ class Credits(models.Model):
                                 'total_paid_concept': 0,
                                 'full_paid': False,
                             })
-                        if reg.af or reg.cs or reg.dn:
+                        if reg.af or reg.cs or reg.dn or reg.ff:
                             rec_cp.create({
                                 'expiry_notice_id': r.id,
                                 'concept': 'interest',
@@ -1596,6 +1624,13 @@ class ExtenssCreditExpiryNotices(models.Model):
     balance_interest_mora = fields.Monetary(string='Balance interest moratoriums', currency_field='company_currency', tracking=True, translate=True)
     amount_condonation = fields.Monetary(string='Amount condonation', currency_field='company_currency', tracking=True, translate=True)
 
+    #####
+    sum_con_capital = fields.Monetary(string='sum capital', currency_field='company_currency', compute='_compute_amount_con_capital', store=True, tracking=True, translate=True)
+    sum_con_interest = fields.Monetary(string='sum interest', currency_field='company_currency', compute='_compute_amount_con_interest', store=True, tracking=True, translate=True)
+    sum_con_capvat = fields.Monetary(string='sum capvat', currency_field='company_currency', compute='_compute_amount_con_capvat', store=True, tracking=True, translate=True)
+    sum_con_intvat = fields.Monetary(string='sum intvat', currency_field='company_currency', compute='_compute_amount_con_intvat', store=True, tracking=True, translate=True)
+    #####
+
     company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
     company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company.id)
 
@@ -1624,6 +1659,7 @@ class ExtenssCreditExpiryNotices(models.Model):
         for reg in self:
             reg.total_paid_moras = sum([line.total_paid_concept for line in reg.expiry_notice_ids if line.concept == 'morint' or line.concept == 'morintvat' or line.concept == 'condonation'])
             #reg.balance_interest_mora = sum([line.total_paid_concept for line in reg.expiry_notice_ids if line.concept == 'morint' or line.concept == 'morintvat' or line.concept == 'condonation'])
+
     @api.depends('interest_moratoriums','vat_interest_mora')
     def _compute_total_int_mora(self):
         for reg in self:
@@ -1635,6 +1671,28 @@ class ExtenssCreditExpiryNotices(models.Model):
         for reg in self:
             reg.to_pay = reg.total_interest_mora - reg.total_paid_moras
             reg.balance_interest_mora = reg.total_interest_mora - reg.total_paid_moras
+
+    ###############
+    @api.depends('expiry_notice_ids','expiry_notice_ids.total_paid_concept','expiry_notice_ids.amount_concept')
+    def _compute_amount_con_capital(self):
+        for reg in self:
+            reg.sum_con_capital = sum([line.total_paid_concept for line in reg.expiry_notice_ids if line.concept == 'capital'])
+
+    @api.depends('expiry_notice_ids','expiry_notice_ids.total_paid_concept','expiry_notice_ids.amount_concept')
+    def _compute_amount_con_interest(self):
+        for reg in self:
+            reg.sum_con_interest = sum([line.total_paid_concept for line in reg.expiry_notice_ids if line.concept == 'interest'])
+
+    @api.depends('expiry_notice_ids','expiry_notice_ids.total_paid_concept','expiry_notice_ids.amount_concept')
+    def _compute_amount_con_capvat(self):
+        for reg in self:
+            reg.sum_con_capvat = sum([line.total_paid_concept for line in reg.expiry_notice_ids if line.concept == 'capvat'])
+
+    @api.depends('expiry_notice_ids','expiry_notice_ids.total_paid_concept','expiry_notice_ids.amount_concept')
+    def _compute_amount_con_intvat(self):
+        for reg in self:
+            reg.sum_con_intvat = sum([line.total_paid_concept for line in reg.expiry_notice_ids if line.concept == 'intvat'])
+    ###############
 
     def automatic_generating_moras(self):
         print('print automatic_generating_moras')

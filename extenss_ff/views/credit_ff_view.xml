@@ -474,29 +474,19 @@
         </field>
     </record>
 
-
-    <!-- <record model="ir.ui.view" id="view_camp_graph">
-        <field name="name">crm.lead.camp.graph</field>
-        <field name="model">sale.report</field>
-        <field name="arch" type="xml">
-            <graph string="Camps">
-                <field name="partner_id" type="col"/>
-                <field name="price_total" type="measure"/>
-                <field name="user_id"/>
-                <field name="date" interval="month" type="row"/>
-            </graph>
-        </field>
-    </record> -->
-
     <record id="extenss_credit_ff_moras_view_graph" model="ir.ui.view">
         <field name="name">extenss.credit.ff.moras.view.graph</field>
         <field name="model">extenss.credit</field>
         <field name="arch" type="xml">
-            <graph string="Credit Graph">
-                <!-- <field name="credit_id" type="row"/> -->
+            <graph string="Credit Graph" type="bar">
+                <!-- <field name="credit_id" type="col"/> -->
                 <!-- <field name="salesperson_id"/> -->
-                <field name="total_moras" type="measure"/>
-                <field name="create_date" interval="month" type="row"/>
+                <!-- <field name="total_moras" type="measure"/> -->
+                <field name="create_date" interval="month"/>
+                <!-- <field name="sum_capital" operator="+"/>
+                <field name="sum_interest" operator="+"/>
+                <field name="sum_capvat" operator="+"/>
+                <field name="sum_intvat" operator="+"/> -->
                 
             </graph>
         </field>
@@ -518,7 +508,9 @@
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <dashboard>
+                <group>
                 <view type="graph" ref="extenss_ff.extenss_credit_ff_view_graph"/>
+                </group>
                 <group>
                     <group>
                         <aggregate name="credits" string="Credits" group_operator="count" field="id" measure="__count__"/>
@@ -527,10 +519,12 @@
                         <aggregate name="count_moras" string="Count Moras" group_operator="count" field="count_moras" measure="__count__"/>
                         <aggregate name="total_moras" string="Total Moras" field="total_moras" widget="monetary"/>
                         <aggregate name="total_paid" string="Total Paid" field="total_paid" widget="monetary"/>
-                        <aggregate name="past_due_interest" string="" field="past_due_interest" widget="monetary"/>
+                        <aggregate name="past_due_interest" string="Past due interest" field="past_due_interest" widget="monetary"/>
+                        <!-- <aggregate name="concept" string="Concept" field="credit_expiry_ids.amount_concept" widget="monetary"/> -->
                     </group>
-                    <group col="1">
+                    <group>
                         <widget name="pie_chart" title="Sales person" attrs="{'groupby': 'salesperson_id'}"/>
+                        <widget name="pie_chart" title="Prueba" attrs="{'groupby': 'salesperson_id'}"/>
                     </group>
                 </group>
             </dashboard>
@@ -538,13 +532,13 @@
     </record>
 
     <record id="action_dashboard_ff_graph" model="ir.actions.act_window.view">
-        <field name="sequence" eval="3"/>
-        <field name="view_mode">graph</field>
+        <!-- <field name="sequence" eval="3"/> -->
+        <field name="view_mode">dashboard</field>
         <field name="view_id" ref="extenss_ff.extenss_credit_ff_view_dashboard"/>
     </record>
 
     <record id="action_moras_ff_graph" model="ir.actions.act_window.view">
-        <field name="sequence" eval="3"/>
+        <!-- <field name="sequence" eval="3"/> -->
         <field name="view_mode">graph</field>
         <field name="view_id" ref="extenss_ff.extenss_credit_ff_moras_view_graph"/>
     </record>

@@ -556,10 +556,10 @@
                         <aggregate name="days_to_assign" string="Days to Assign" field="day_open" group_operator="avg" value_label="days"/>
                         <aggregate name="days_to_close" string="Days to Close" field="day_close" group_operator="avg" value_label="days"/>
                         <aggregate name="days_exceeding_closing" string="Exceeding Close Days" field="days_exceeding_closing" group_operator="avg"/> -->
-                    <!-- </group> -->
-                    <!-- <group col="1">
-                        <widget name="pie_chart" title="Win/Loss Ratio" attrs="{'groupby': 'won_status', 'domain': '[\'|\', (\'active\', \'=\', False), (\'active\', \'=\', True), (\'won_status\', \'!=\', \'pending\')]'}"/>
-                        <widget name="pie_chart" title="Medium" attrs="{'groupby': 'medium_id'}"/>-->
+                    </group>
+                    <group col="1">
+                        <!-- <widget name="pie_chart" title="Win/Loss Ratio" attrs="{'groupby': 'won_status', 'domain': '[\'|\', (\'active\', \'=\', False), (\'active\', \'=\', True), (\'won_status\', \'!=\', \'pending\')]'}"/> -->
+                        <widget name="pie_chart" title="Sales person" attrs="{'groupby': 'salesperson_id'}"/>
                     </group>
                 </group>
                 <!-- <view type="pivot" ref="crm.crm_lead_view_pivot"/>
@@ -597,7 +597,7 @@
 
     <record id="action_dashboard_dn_graph" model="ir.actions.act_window.view">
         <field name="sequence" eval="3"/>
-        <field name="view_mode">graph</field>
+        <field name="view_mode">dashboard</field>
         <field name="view_id" ref="extenss_dn.extenss_credit_dn_view_dashboard"/>
         <!-- <field name="act_window_id" ref="crm_enterprise.crm_opportunity_action_dashboard"/> -->
     </record>
