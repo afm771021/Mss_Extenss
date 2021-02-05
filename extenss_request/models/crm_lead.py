@@ -388,10 +388,11 @@ class Lead(models.Model):
             if count_sales == 0 and self.product_name != 'LFF':
                 raise ValidationError(_('Please add a quote'))
 
-        docs = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', self.id)])
-        for reg_docs in docs:
-            if not reg_docs.attachment_id:
-                raise ValidationError(_('Attach the corresponding documents'))
+        if self.product_name != 'ff':
+            docs = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', self.id)])
+            for reg_docs in docs:
+                if not reg_docs.attachment_id:
+                    raise ValidationError(_('Attach the corresponding documents'))
 
         quotations = self.env['sale.order'].search([('opportunity_id', '=', self.id),('state', '=', 'sale')])
         #if quotations:
@@ -635,10 +636,12 @@ class Lead(models.Model):
 
     def release_ff(self):
         id_cuenta = self.create_account()
-        print(id_cuenta)
         prods_ids = self.env['extenss.product.product'].search([('product_tmpl_id', '=', self.catlg_product.id)])
         for prod_id in prods_ids:
             id_prod = prod_id.id
+            base = prod_id.calculation_base.name
+            tax = prod_id.taxes_id.amount
+            factor_rate = tax * prod_id.rate_arrears_interest
 
         credit_id = self.env['extenss.credit'].create({
             'customer_id': self.partner_id.id,
@@ -666,6 +669,10 @@ class Lead(models.Model):
             'invoice_date': self.invoice_date,
             'capacity': self.capacity,
             'days': self.days,
+            'calculation_base': base,
+            'vat_factor': tax,
+            'factor_rate': factor_rate,
+            'rate_arrears_interest': prod_id.rate_arrears_interest
         })
 
         self.env['extenss.credit.amortization'].create({
@@ -862,10 +869,10 @@ class Lead(models.Model):
                             self.solicitud = self.id
                             self.contacto = ''
 
-                        existe = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', reg.id), ('doc_prod_id', '=', regname.id)])
+                        existe = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', self.id), ('doc_prod_id', '=', regname.id)])
                         existe_cliente = self.env['documents.document'].search([('partner_id', '=', self.partner_id.id),('doc_prod_id', '=', regname.id)])
 
-                        if existe.id == False and existe_cliente == False:
+                        if not existe and not existe_cliente:
                             document = self.env['documents.document'].create({
                                 'name': namedoc.name,
                                 'type': 'empty',

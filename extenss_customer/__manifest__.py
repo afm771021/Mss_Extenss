@@ -1,8 +1,8 @@
 {
-    'name' : 'Extenss Consumer',
+    'name' : 'Extenss Costumer',
     'version' : '1.0',
-    'summary': 'Extenss Consumer',
-    'description': 'Extenss Consumer',
+    'summary': 'Extenss Costumer',
+    'description': 'Extenss Costumer',
     'author': 'Mastermind Software Services',
     'depends': ['base'],
     'application': False,

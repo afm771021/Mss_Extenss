@@ -5,14 +5,6 @@ from datetime import timedelta
 from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
 
-# PROD_NAME = [
-#     ('af','Arrendamiento Financiero'),
-#     ('ap','Arrendamiento Puro'),
-#     ('cs','Crédito Simple'),
-#     ('DN','Descuento Nómina'),
-#     ('LFF','Línea de Factoraje Financiero'),
-#     ('ff', 'Factoraje Financiero')]
-
 class ExtenssFF(models.Model):
     _inherit = 'extenss.credit'
     _description = 'Credit Financial factoring'
@@ -64,7 +56,7 @@ class ExtenssFF(models.Model):
 
         pay_num_amort = pay_num+1
 
-        reg_due = self.env['extenss.credit.amortization'].search([('no_pay', '=', pay_num),('credit_id', '=', self.id)])
+        reg_due = self.env['extenss.credit.amortization'].search([('no_pay', '=', pay_num_amort),('credit_id', '=', self.id)])
         for rec in reg_due:
             days = self.days_between(rec.expiration_date, self.date_settlement)
 
@@ -128,16 +120,16 @@ class ExtenssFF(models.Model):
         factor_rate = self.factor_rate
         id_accnt = self.bill_id.id
         flag_early_settlement = True
-        if self.dn:
+        if self.ff:
             if self.outstanding_balance > 0:
                 list_concepts.append(['capital', self.outstanding_balance])
         # if self.af:       
         #     if self.capital_vat > 0:
         #         list_concepts.append(['capvat', self.capital_vat])
-        if self.dn:
+        if self.ff:
             if self.interests > 0:
                 list_concepts.append(['interest', self.interests])
-        if self.dn:
+        if self.ff:
             if self.interests_vat > 0:
                 list_concepts.append(['intvat', self.interests_vat])
         
@@ -207,39 +199,39 @@ class ExtenssFF(models.Model):
 
     # af = fields.Boolean(String='AF')
     # account_status_date = fields.Date(string=u'Account Status Date', default=fields.Date.context_today)
-    # conciliation_credit_ids = fields.Many2many('extenss.credit.conciliation_lines',string='Payment')#, domain=lambda self:[('type_rec', '=', 'dn')]
+    conciliation_credit_ids = fields.Many2many('extenss.credit.conciliation_lines',string='Payment')#, domain=lambda self:[('type_rec', '=', 'dn')]
     # bill_id = fields.Many2one('extenss.credit.account', string='Bill', tracking=True, translate=True)
     # amortization_ids = fields.One2many('extenss.credit.amortization', 'credit_id', string='Amortization Table')
-    # balance = fields.Monetary(related='bill_id.balance',currency_field='company_currency')
+    balance = fields.Monetary(related='bill_id.balance',currency_field='company_currency')
 
-    # init_date = fields.Date(string='Init date', tracking=True, translate=True)
-    # invoice_date = fields.Date(string='Invoice date', tracking=True, translate=True)
-    # capacity = fields.Float('% Capacity', (2,2), tracking=True, translate=True)
-    # days = fields.Integer(string='Days', tracking=True, translate=True)
+    init_date = fields.Date(string='Init date', tracking=True, translate=True)
+    invoice_date = fields.Date(string='Invoice date', tracking=True, translate=True)
+    capacity = fields.Float('% Capacity', (2,2), tracking=True, translate=True)
+    days = fields.Integer(string='Days', tracking=True, translate=True)
     #count_credits = fields.Integer(string='Cont', compute='get_count_credits',  tracking=True)
 
     #Liquidacion Anticipada
-    # date_settlement = fields.Date(string='Settlement date', required=True, tracking=True, translate=True, default=fields.Date.context_today)
-    # penalty = fields.Float('Penalty', (2,6), tracking=True, translate=True)
-    # outstanding_balance = fields.Monetary(string='Outstanding balance', currency_field='company_currency', tracking=True, translate=True)
-    # overdue_balance = fields.Monetary(string='Overdue Balance', currency_field='company_currency', tracking=True, translate=True)
-    # days_interest = fields.Integer(string='Days of interest', tracking=True, translate=True)
-    # interests = fields.Monetary(string='Interests', currency_field='company_currency', tracking=True, translate=True)
-    # interests_moratoriums = fields.Monetary(string='Interests moratoriums', currency_field='company_currency', tracking=True, translate=True)
-    # vat_interest_mora = fields.Monetary(string='Interest moratoriums VAT', currency_field='company_currency', tracking=True, translate=True)
-    # capital_vat= fields.Monetary(string='Capital VAT', currency_field='company_currency', tracking=True, translate=True)
-    # interests_vat = fields.Monetary(string='Interests VAT', currency_field='company_currency', tracking=True, translate=True)
+    date_settlement = fields.Date(string='Settlement date', required=True, tracking=True, translate=True, default=fields.Date.context_today)
+    penalty = fields.Float('Penalty', (2,6), tracking=True, translate=True)
+    outstanding_balance = fields.Monetary(string='Outstanding balance', currency_field='company_currency', tracking=True, translate=True)
+    overdue_balance = fields.Monetary(string='Overdue Balance', currency_field='company_currency', tracking=True, translate=True)
+    days_interest = fields.Integer(string='Days of interest', tracking=True, translate=True)
+    interests = fields.Monetary(string='Interests', currency_field='company_currency', tracking=True, translate=True)
+    interests_moratoriums = fields.Monetary(string='Interests moratoriums', currency_field='company_currency', tracking=True, translate=True)
+    vat_interest_mora = fields.Monetary(string='Interest moratoriums VAT', currency_field='company_currency', tracking=True, translate=True)
+    capital_vat= fields.Monetary(string='Capital VAT', currency_field='company_currency', tracking=True, translate=True)
+    interests_vat = fields.Monetary(string='Interests VAT', currency_field='company_currency', tracking=True, translate=True)
 
-    # penalty_amount = fields.Monetary(string='Penalty Amount', currency_field='company_currency', tracking=True, translate=True)
-    # purchase_option = fields.Monetary(string='Purchase option', currency_field='company_currency', tracking=True, translate=True)
-    # vat_purchase_option = fields.Monetary(string='VAT Purchase option', currency_field='company_currency', tracking=True, translate=True)
-    # security_deposit_balance = fields.Monetary(string='Security Deposit Balance', currency_field='company_currency', tracking=True, translate=True)
-    # balance_income_deposit = fields.Monetary(string='Balance Income on Deposit', currency_field='company_currency', tracking=True, translate=True)
-    # total_settle = fields.Monetary(string='Total to Settle', currency_field='company_currency', tracking=True, translate=True)
-    # balance_inicial = fields.Monetary(string='Balance intial', currency_field='company_currency', tracking=True, translate=True)
+    penalty_amount = fields.Monetary(string='Penalty Amount', currency_field='company_currency', tracking=True, translate=True)
+    purchase_option = fields.Monetary(string='Purchase option', currency_field='company_currency', tracking=True, translate=True)
+    vat_purchase_option = fields.Monetary(string='VAT Purchase option', currency_field='company_currency', tracking=True, translate=True)
+    security_deposit_balance = fields.Monetary(string='Security Deposit Balance', currency_field='company_currency', tracking=True, translate=True)
+    balance_income_deposit = fields.Monetary(string='Balance Income on Deposit', currency_field='company_currency', tracking=True, translate=True)
+    total_settle = fields.Monetary(string='Total to Settle', currency_field='company_currency', tracking=True, translate=True)
+    balance_inicial = fields.Monetary(string='Balance intial', currency_field='company_currency', tracking=True, translate=True)
 
-    # company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
-    # company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company.id)
+    company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
+    company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company.id)
 
     def action_apply_payment(self):
         #self.apply_mov_pay()
@@ -280,45 +272,16 @@ class ExtenssFF(models.Model):
         else:
             raise ValidationError(_('Not exist record in Configuration in Datamart'))
 
-    # def apply_mov_pay(self):
-    #     for reg in self.conciliation_credit_ids:
-    #         if reg.check == False and reg.status == 'pending':
-    #             #print(self.bill_id.id)
-    #             self.env['extenss.credit.accounting_payments'].action_apply_movement(self.bill_id.id, 'abono', reg.amount,'')
-    #             # print(reg.id)
-    #             # print(reg.customer.id)
-    #             # print(reg.amount)
-    #             # print(reg.status)
-    #             # print(self.product_id.id)
-    #             reg.status = 'applied'
-    #             reg.check = True
-    #         # else:
-    #         #     raise ValidationError(_('Not exist record selected in field Payment'))
-
-    #     exp_notices = self.env['extenss.credit.expiry_notices'].search([('credit_expiry_id', '=', self.id),('total_to_pay', '>', 0)])
-    #     for exp_notice in exp_notices:
-    #         print(exp_notice.total_to_pay)
-    #         print(exp_notice.id)
-    #         self.env['extenss.credit.conciliation'].apply_payment(exp_notice.id, self.payment_date)
-
     def action_pay_early_settlement(self):
         self.action_apply_request()
         list_concepts = []
         for reg in self.conciliation_credit_ids:
             if reg.check == False and reg.status == 'pending':
-                # print(self.bill_id.id)
                 self.env['extenss.credit.accounting_payments'].action_apply_movement(self.bill_id.id, 'abono', reg.amount,'')
-                # print(reg.id)
-                # print(reg.customer.id)
-                # print(reg.amount)
-                # print(reg.status)
-                # print(self.product_id.id)
                 reg.status = 'applied'
                 reg.check = True
         exp_notices = self.env['extenss.credit.expiry_notices'].search([('credit_expiry_id', '=', self.id),('total_to_pay', '>', 0)])
         for exp_notice in exp_notices:
-            # print(exp_notice.total_to_pay)
-            # print(exp_notice.id)
             self.env['extenss.credit.conciliation'].apply_payment(exp_notice.id, self.payment_date)
 
         regs_conf = self.env['extenss.datamart.configuration'].search([('concept', '=', 'early_set')])
@@ -327,28 +290,16 @@ class ExtenssFF(models.Model):
                 # print(reg.id)
                 for reg_events in reg_conf.event_id:
                     event_key = reg_events.event_key
-                    # print(event_key)
-
-                    #for lines in self.conciliation_lines_ids:
                     list_concepts.append(reg.customer.id)
                     list_concepts.append(reg.amount) 
                     list_concepts.append(self.product_id.id)
-                    list_concepts.append(event_key) #)
-                    # print(list_concepts)
+                    list_concepts.append(event_key)
                     self.env['extenss.credit'].create_records(list_concepts)
                     list_concepts = []
             self.flag_early_settlement = True
             self.credit_status = 'liquidated'
         else:
             raise ValidationError(_('Not exist record in Configuration in Datamart'))
-        #self.apply_mov_pay()
-        #self.action_apply_payment()
-        # exp_notices = self.env['extenss.credit.expiry_notices'].search([('credit_expiry_id', '=', self.id),('total_to_pay', '>', 0)])
-        # for exp_notice in exp_notices:
-        #     print(exp_notice.total_to_pay)
-        #     print(exp_notice.id)
-            #self.env['extenss.credit.conciliation'].apply_payment(exp_notice.id, self.payment_date)
-        #self.conf_datamart('early_set')
 
     # def conf_datamart(self, type_concept):
     #     list_concepts = []
@@ -435,8 +386,6 @@ class ExtenssFF(models.Model):
 class ExtenssLead(models.Model):
     _inherit = 'crm.lead'
 
-    #product_name = fields.Selection(PROD_NAME, string='Product', tracking=True, translate=True)
-
     amount_ff = fields.Monetary(string='Amount', currency_field='company_currency')
     amount_out_vat = fields.Monetary(string='Amount without VAT', currency_field='company_currency', compute='_compute_amount', store=True, tracking=True, translate=True)
     purpose = fields.Char(string='Purpose', tracking=True, translate=True)
@@ -458,18 +407,12 @@ class ExtenssLead(models.Model):
     variance = fields.Char(string='Variance', tracking=True, translate=True)
     current_rate = fields.Float(string='Current rate', tracking=True, translate=True, compute='_compute_current_rate', store=True)
     days = fields.Integer(string='Days', compute='_compute_days', store=True, tracking=True, translate=True)
-
     amount_delivered = fields.Monetary(string='Amount delivered', currency_field='company_currency', tracking=True, translate=True)
-
     total_available = fields.Monetary(string='Total available', currency_field='company_currency', tracking=True, translate=True)
     total_willing = fields.Monetary(string='Total willing', currency_field='company_currency', tracking=True, translate=True )
 
-    #sale_order_ids = fields.One2many('sale.order', 'opportunity_id', string='Orders', domain=lambda self:[('state','=','sale')])
-    #amount = fields.Monetary(related='sale_order_ids.amount', currency_field='company_currency')
-    #af_s = fields.Boolean(related='sale_order_ids.af')
-    #dn_s = fields.Boolean(related='sale_order_ids.dn')
-    #productid = fields.Many2one(related='sale_order_ids.product_id')
-    conciliation_lines_ids = fields.Many2many('extenss.credit.conciliation_lines', string='Payment')#,  default=_default_conciliation)
+    conciliation_lines_ids = fields.Many2many('extenss.credit.conciliation_lines', string='Payment')#,  default=_default_conciliation)#,'crm_con_rel', 'crm_id', 'con_id'
+    #con_lines_ids = fields.Many2many('extenss.credit.conciliation_lines','crm_lines_rel', 'crm_id', 'lines_id', string='Payment')
     flag_dispersion = fields.Boolean(string='Dispersion', default=False, tracking=True, translate=True)
 
     company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
@@ -487,7 +430,7 @@ class ExtenssLead(models.Model):
                 for reg_events in reg_conf.event_id:
                     event_key = reg_events.event_key
                     #for reg_order in self.sale_order_ids:
-                    for lines in self.conciliation_lines_ids:
+                    for lines in self.con_lines_ids:#self.conciliation_lines_ids:
                         if self.total_commission == abs(lines.amount) and self.partner_id == lines.customer:
                             print('entra ')
                             list_data.append(lines.customer.id)
@@ -548,30 +491,17 @@ class ExtenssProvisions(models.Model):
             'current_rate': self.current_rate,
         })
 
-# class SaleOrder(models.Model):
-#     _inherit = 'sale.order'
+# class ExtenssCreditConciliation(models.Model):
+#     _inherit = 'extenss.credit.conciliation'
 
-#     opportunity_id = fields.Many2one('crm.lead', string='Opportunity', check_company=True)#domain="[('type', '=', 'opportunity'), '|', ('company_id', '=', False), ('company_id', '=', company_id)]"
-#     total_initial_payments = fields.Monetary('Total Initial Payments', currency_field='company_currency', tracking=True)
-#     af = fields.Boolean(String='AF')
-#     dn = fields.Boolean(string='DN')
-#     product_id = fields.Many2one('extenss.product.product', 'Product Name')
-#     amount = fields.Monetary('Request Amount', currency_field='company_currency', tracking=True)
+#     type_conciliation = fields.Selection(selection_add=[('dn', 'DN'),], default='dn', string='Type', tracking=True, translate=True)
 
-#     company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
-#     company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company.id)
+# class ExtenssCreditConciliationLines(models.Model):
+#     _inherit = 'extenss.credit.conciliation_lines'
+#     _description = 'Conciliation Lines'
 
-class ExtenssCreditConciliation(models.Model):
-    _inherit = 'extenss.credit.conciliation'
-
-    type_conciliation = fields.Selection(selection_add=[('dn', 'DN'),], default='dn', string='Type', tracking=True, translate=True)
-
-class ExtenssCreditConciliationLines(models.Model):
-    _inherit = 'extenss.credit.conciliation_lines'
-    _description = 'Conciliation Lines'
-
-    conciliation_credit_id = fields.Many2one('extenss.credit', string='Credit_id', ondelete='cascade', tracking=True, translate=True)
-    conciliation_lines_id = fields.Many2one('crm.lead', string='CRM id', ondelete='cascade', tracking=True, translate=True)
-    conciliation_id = fields.Many2one('extenss.credit.conciliation', string='Conciliation', ondelete='cascade', tracking=True, translate=True)
-    type_rec = fields.Selection(default='dn')
-    status = fields.Selection(string='Status', default='pending', tracking=True, translate=True)
+#     conciliation_credit_id = fields.Many2one('extenss.credit', string='Credit_id', ondelete='cascade', tracking=True, translate=True)
+#     conciliation_lines_id = fields.Many2one('crm.lead', string='CRM id', ondelete='cascade', tracking=True, translate=True)
+#     conciliation_id = fields.Many2one('extenss.credit.conciliation', string='Conciliation', ondelete='cascade', tracking=True, translate=True)
+#     type_rec = fields.Selection(default='dn')
+#     status = fields.Selection(string='Status', default='pending', tracking=True, translate=True)
