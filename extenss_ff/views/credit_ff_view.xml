@@ -48,15 +48,15 @@
                             <field name="product_id" readonly="1" options="{'no_open': True}"/>
                             <field name="type_credit" readonly="1" options="{'no_open': True}"/>
                             <br/>
-                            <!-- <field name="calculation_base" readonly="1"/> -->
+                            <field name="calculation_base" readonly="1"/>
                             <field name="amount_financed" readonly="1"/>
                             <!-- <field name="term" readonly="1"/>
                             <field name="frequency" readonly="1" options="{'no_open': True}"/> -->
-                            <!-- <label for="vat_factor"/>
+                            <label for="vat_factor"/>
                             <div id="vat_factor" >
                                 <field name="vat_factor" readonly="1" widget="float" class="oe_inline"/>
                                 <span class="oe_grey"> %%</span>
-                            </div> -->
+                            </div>
                             <field name="rate_type" readonly="1"/>
                             <!-- <field name="base_rate_type" readonly="1"/> -->
                             <!-- <label for="base_rate_value"/>
@@ -70,13 +70,13 @@
                                 <field name="interest_rate" readonly="1" widget="float" class="oe_inline"/>
                                 <span class="oe_grey"> %%</span>
                             </div>
-                            <!-- <label for="factor_rate"/>
+                            <label for="factor_rate"/>
                             <div id="factor_rate" >
                                 <field name="factor_rate" readonly="1" widget="float" class="oe_inline"/>
                                 <span class="oe_grey"> %%</span>
                             </div>
                             <field name="rate_arrears_interest" readonly="1"/>
-                            <field name="days_notice"/>
+                            <!--<field name="days_notice"/>
                             <field name="number_pay_rest" readonly="1"/> -->
                             <field name="hiring_date" readonly="1"/>
                             <field name="first_payment_date" readonly="1"/>
