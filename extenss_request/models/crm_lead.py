@@ -104,7 +104,7 @@ class Lead(models.Model):
     @api.constrains('stage_id')
     def _check_stage_id(self):
         if self.stage_id.id != self.env['crm.stage'].search([('sequence', '=', '1')]).id:
-            self.validations()
+            #self.validations()### Se comenta esta validacion ya que se realiza el llamado de este metodo en el boton de enviar
             self.user_send_req = self.env.user.id
             #self.stage_id =  2
         if self.stage_id.id != self.env['crm.stage'].search([('sequence', '=', '6')]).id and self.btn_active == False:
@@ -172,6 +172,7 @@ class Lead(models.Model):
             self.validations_ff()
         else:
             self.validations()
+        self.validatedocs()
         self.send_crm = 'Sending'
         self.user_send_req = self.env.user.id
         self.stage_id = 2
@@ -184,6 +185,7 @@ class Lead(models.Model):
                 if self.flag_initial_payment == False:
                     raise ValidationError(_('Initial payment is missing'))
                 self.stage_id = self.env['crm.stage'].search([('sequence', '=', '6')]).id
+                self.validatedocs()
 
             if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '4')]).id:
                 self.stage_id = self.env['crm.stage'].search([('sequence', '=', '5')]).id
@@ -382,17 +384,23 @@ class Lead(models.Model):
                         'amortization_ids': amortization_ids
                     })
 
+    def validatedocs(self):
+        docs = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', self.id)])
+        for reg_docs in docs:
+            if not reg_docs.attachment_id:
+                raise ValidationError(_('Attach the corresponding documents'))
+
+
     def validations(self):
         if self.stage_id.id == self.env['crm.stage'].search([('sequence', '=', '2')]).id:
             count_sales = self.env['sale.order'].search_count([('opportunity_id', '=', self.id),('state', '=', 'sale')])
             if count_sales == 0 and self.product_name != 'LFF':
                 raise ValidationError(_('Please add a quote'))
 
-        if self.product_name != 'ff':
-            docs = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', self.id)])
-            for reg_docs in docs:
-                if not reg_docs.attachment_id:
-                    raise ValidationError(_('Attach the corresponding documents'))
+        # docs = self.env['documents.document'].search(['|', ('partner_id', '=', self.partner_id.id), ('lead_id', '=', self.id)])
+        # for reg_docs in docs:
+        #     if not reg_docs.attachment_id:
+        #         raise ValidationError(_('Attach the corresponding documents'))
 
         quotations = self.env['sale.order'].search([('opportunity_id', '=', self.id),('state', '=', 'sale')])
         #if quotations:

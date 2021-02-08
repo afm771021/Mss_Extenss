@@ -411,8 +411,8 @@ class ExtenssLead(models.Model):
     total_available = fields.Monetary(string='Total available', currency_field='company_currency', tracking=True, translate=True)
     total_willing = fields.Monetary(string='Total willing', currency_field='company_currency', tracking=True, translate=True )
 
-    conciliation_lines_ids = fields.Many2many('extenss.credit.conciliation_lines', string='Payment')#,  default=_default_conciliation)#,'crm_con_rel', 'crm_id', 'con_id'
-    #con_lines_ids = fields.Many2many('extenss.credit.conciliation_lines','crm_lines_rel', 'crm_id', 'lines_id', string='Payment')
+    conciliation_lines_ids = fields.Many2many('extenss.credit.conciliation_lines', 'crm_lines_rel', 'crm_id', 'lines_id', string='Payment', domain=lambda self:[('type_rec', '!=', 'pi')])#,  default=_default_conciliation)#,'crm_con_rel', 'crm_id', 'con_id'
+    con_lines_ids = fields.Many2many('extenss.credit.conciliation_lines', 'crm_lines_rel', 'crm_id', 'lines_id', string='Payment', domain=lambda self:[('type_rec', '!=', 'di')])#domain=lambda self:[('type_rec', '=', 'pi')
     flag_dispersion = fields.Boolean(string='Dispersion', default=False, tracking=True, translate=True)
 
     company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
@@ -422,7 +422,7 @@ class ExtenssLead(models.Model):
 
     ####Metodo para Pago inicial
     def action_apply_payment(self):
-        #print('entra a metodo')
+        print('entra a metodo')
         list_data = []
         regs_conf = self.env['extenss.datamart.configuration'].search([('concept', '=', 'pay_initial')])
         if regs_conf:
@@ -441,6 +441,7 @@ class ExtenssLead(models.Model):
                             list_data = []
                             lines.status = 'applied'
                             lines.check = True
+                            lines.type_rec = 'pi'
                             #self.stage_id = self.env['crm.stage'].search([('sequence', '=', '6')]).id
                             self.flag_initial_payment = True
         else:
@@ -466,6 +467,7 @@ class ExtenssLead(models.Model):
                             list_data = []
                             lines.status = 'applied'
                             lines.check = True
+                            lines.type_rec='di'
                             #self.stage_id = self.env['crm.stage'].search([('sequence', '=', '6')]).id
                             self.flag_dispersion = True
         else:
@@ -494,14 +496,14 @@ class ExtenssProvisions(models.Model):
 # class ExtenssCreditConciliation(models.Model):
 #     _inherit = 'extenss.credit.conciliation'
 
-#     type_conciliation = fields.Selection(selection_add=[('dn', 'DN'),], default='dn', string='Type', tracking=True, translate=True)
+#     type_conciliation = fields.Selection(selection_add=[('pi', 'PI'),], default='dn', string='Type', tracking=True, translate=True)
 
-# class ExtenssCreditConciliationLines(models.Model):
-#     _inherit = 'extenss.credit.conciliation_lines'
-#     _description = 'Conciliation Lines'
+class ExtenssCreditConciliationLines(models.Model):
+    _inherit = 'extenss.credit.conciliation_lines'
+    _description = 'Conciliation Lines'
 
 #     conciliation_credit_id = fields.Many2one('extenss.credit', string='Credit_id', ondelete='cascade', tracking=True, translate=True)
 #     conciliation_lines_id = fields.Many2one('crm.lead', string='CRM id', ondelete='cascade', tracking=True, translate=True)
 #     conciliation_id = fields.Many2one('extenss.credit.conciliation', string='Conciliation', ondelete='cascade', tracking=True, translate=True)
-#     type_rec = fields.Selection(default='dn')
+    type_rec = fields.Selection(selection_add=[('pi', 'PI'),('di','DI'),])
 #     status = fields.Selection(string='Status', default='pending', tracking=True, translate=True)
