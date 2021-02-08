@@ -60,7 +60,7 @@
                                     </header>
                                 </form>
                                 <field name="flag_initial_payment" invisible="1"/>
-                                <field name="conciliation_lines_ids" options="{'no_create': True}" domain="[('status', '=', 'pending')]">
+                                <field name="con_lines_ids" options="{'no_create': True}" domain="[('status', '=', 'pending')]">
                                     <tree editable="bottom">
                                         <field name="check"/>
                                         <field name="reference" readonly="1"/>
@@ -95,7 +95,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">crm.lead</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">['|',('product_name', '=', 'ff'),('product_name', '=', 'LFF'),('stage_id', '=', 5),('flag_initial_payment', '=', False)]</field>
+        <field name="domain">['|',('product_name', '=', 'ff'),('product_name', '=', 'LFF'),('stage_id', '=', 13),('flag_initial_payment', '=', False)]</field>
         <field name="view_ids"
                 eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('extenss_ff.view_tree_extenss_ff_initial_pay')}),
