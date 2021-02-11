@@ -3,6 +3,7 @@ from datetime import datetime, date
 from odoo.exceptions import Warning, UserError, ValidationError
 import base64
 import math
+import re
 
 PROD_NAME = [
     ('af','Arrendamiento Financiero'),
