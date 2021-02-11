@@ -19,6 +19,7 @@
         'views/crm_lead_views.xml',
         'views/sale_order_views.xml',
         'views/request_portal_template.xml',
+        'views/template.xml',
         'reports/report_amortization.xml',
         'reports/contrato_amortization.xml',
         'reports/pagare_amortization.xml',

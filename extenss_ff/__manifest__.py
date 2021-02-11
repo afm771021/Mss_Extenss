@@ -24,5 +24,6 @@
         'views/credit_ff_acct_portfolio_view.xml',
         'views/credit_ff_dispositions_view.xml',
         'views/credit_ff_statement_account_view.xml',
+        'views/extenss_ff_portal_template.xml',
         ],
 }
